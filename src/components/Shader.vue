@@ -25,12 +25,14 @@ const defaultVertexShaderSrc = `
 precision highp float; 
 varying vec2 vPos;
 varying vec2 vFrameBufferCoord;
+uniform float iRatio;
 
-attribute vec2 iResolution;
 attribute vec3 aPosition;
 void main() { 
-  vFrameBufferCoord = (aPosition.xy / 2.) + .5 ; 
-  vPos = (gl_Position = vec4(aPosition,1.0)).xy; 
+  vec2 pos =  aPosition.xy;
+  vFrameBufferCoord = (pos.xy / 2.) + .5; 
+  gl_Position = vec4(pos , 0.0, 1.0);
+  vPos = gl_Position.xy * vec2(iRatio, 1.) * 0.1; 
 }
 `
 const fetchFragmentShaderSource = async () => {
@@ -73,7 +75,7 @@ onMounted(async () => {
   let tfb = null;
 
   const draw = (time) => {
-    if (twgl.resizeCanvasToDisplaySize(gl.canvas, 0.6)) {
+    if (twgl.resizeCanvasToDisplaySize(gl.canvas, .1)) {
       // resize the attachments
       twgl.resizeFramebufferInfo(gl, fb1);
       twgl.resizeFramebufferInfo(gl, fb2);
@@ -83,11 +85,12 @@ onMounted(async () => {
     const uniforms = {
       iTime: time * 0.001,
       iResolution: [gl.canvas.width, gl.canvas.height],
+      iRatio: gl.canvas.width / gl.canvas.height,
       tFrameBuffer: fb1.attachments[0],
       iRandom: Math.random(),
       iMouse: mouse,
     }
-
+    console.info(uniforms)
     gl.useProgram(programInfo.program)
     twgl.setBuffersAndAttributes(gl, programInfo, bufferInfo)
     twgl.setUniforms(programInfo, uniforms)
@@ -101,7 +104,9 @@ onMounted(async () => {
     fb1 = fb2;
     fb2 = tfb;
 
-    window.requestAnimationFrame(draw)
+    if (shaderCanvas.value) {
+      window.requestAnimationFrame(draw)
+    }
   }
   window.requestAnimationFrame(draw)
 

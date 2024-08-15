@@ -1,8 +1,10 @@
 <template>
   <div>
-    <h1>ungut.at</h1>
     <fixed-background>
-      <slot />
+      <div>    
+        <h1>ungut.at</h1>
+        <slot />
+      </div>
       <template #background>
         <shader  path="assets/shaders/torus.frag"></shader>
       </template>

@@ -51,19 +51,25 @@ vec4 opSmoothUnion( vec4 d1, vec4 d2, float k )
     float d = mix( d1.w, d2.w, h ) - k*h*(1.0-h);
     return vec4(mix( d1.rgb, d2.rgb, h ), d);
 }
+vec4 opSmoothSubtraction( vec4 d1, vec4 d2, float k )
+{
+    float h = clamp( 0.5 - 0.5*(d2.w+d1.w)/k, 0.0, 1.0 );
+    float d = mix( d1.w, d2.w, h ) - k*h*(1.0-h);
+    return vec4(mix( d1.rgb, d2.rgb, h ), d);
+}
 
 vec4 findHitInScene(vec3 samplePoint) {
     vec3 col1 = vec3(.3);
-    vec3 col2 = vec3(.9);
+    vec3 col2 = vec3(.2, .2, .9);
     vec3 col3 = vec3(1., 0., 0.);
     vec4 torus = vec4(col1, sdTorus(samplePoint-vec3(-15.0, 0.0, 0.0),  vec2(1.2, .5)));
-    vec4 s1 = vec4(col3,sdSphere(samplePoint-vec3(cos(iTime)-5.0, cos(iTime) + sin(iTime/3.), sin(iTime) * sin(iTime/5.)), .2));
-    vec4 s2 = vec4(col3,sdSphere(samplePoint-vec3(-1.0, .5, 2.0), .2));
+    vec4 s1 = vec4(col3, sdSphere(samplePoint-vec3(cos(iTime)-5.0, cos(iTime) + sin(iTime/3.), sin(iTime) * sin(iTime/5.) + sin(iTime/2.)), .2));
+    vec4 s2 = vec4(col2, sdSphere(samplePoint-vec3(-4.0, 0., 0.0), .2));
     vec4 plane = vec4(col1, sdPlane(samplePoint, normalize(vec3(1.,0.,0.)), 5.));
-    vec4 res = torus;
-    res = opU(res, s1);
+    vec4 res = s1;
+    // res = opU(res, s1);
     //res = opU(res, s2);
-    res = opSmoothUnion(res, plane, 1.);
+    res = opSmoothUnion(res, s2, .5);
     return res;
 }
 
@@ -72,7 +78,7 @@ vec4 trace(vec3 ray) {
     float far = 20.0;
 
     float distance = near;
-    vec3 materialColor = vec3(.2,.4,4.);
+    vec3 materialColor = vec3(.2,.2,.2);
 
     for (int i=0; i<128; i++) {
 	    float error = 0.0004*distance;
@@ -83,7 +89,7 @@ vec4 trace(vec3 ray) {
         materialColor = hit.rgb;
     }
 
-    if (distance>far) {materialColor = vec3(.5);}
+    if (distance>far) {materialColor = vec3(0.01);}
     return vec4(materialColor, distance);
 }
 
@@ -183,11 +189,11 @@ void mainImage (vec2 fragCoord) {
     color =  pow( color, vec3(0.4545) );
     // gl_FragColor = vec4( coordinates.xyy, 1.);
     float ra = rand(vec2(gl_FragCoord[1], gl_FragCoord[0]) * iRandom);
-    if (ra > .5) {
+    if (ra > .9) {
         gl_FragColor =  vec4( color, 1.);
     } else {
         vec4 last = texture2D(tFrameBuffer, vFrameBufferCoord);
-        gl_FragColor = last * .99;
+        gl_FragColor = vec4( mix(color, last.rgb, .9), 1.);
         // gl_FragColor = vec4( vPos / iResolution, 1, 1);
     }
 
