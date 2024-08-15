@@ -14,9 +14,6 @@ jobs:
         with:
           node-version: "20"
       - run: npm install
-      - uses: actions/configure-pages@v5
-        with:
-          static_site_generator: nuxt
       - run: npx nuxt build --preset github_pages
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
