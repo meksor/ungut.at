@@ -1,5 +1,4 @@
-precision lowp float;
-uniform vec2 iResolution;
+precision highp float;
 uniform vec2 iMouse;
 uniform float iTime;
 uniform float iRandom;
@@ -95,7 +94,7 @@ vec4 trace(vec3 ray) {
 }
 
 vec3 calcHitNormal(vec3 samplePoint) {
-    vec2 eps = vec2(1.0,-1.0)*0.5773*0.0005;
+    vec2 eps = vec2(1.0,-1.0)*0.1;
     return normalize( eps.xyy*findHitInScene( samplePoint + eps.xyy ).w +
 					  eps.yyx*findHitInScene( samplePoint + eps.yyx ).w +
 					  eps.yxy*findHitInScene( samplePoint + eps.yxy ).w +
@@ -118,9 +117,9 @@ float calcAO( in vec3 pos, in vec3 nor )
 }
 
 vec3 getLightDir() {
-    float x = (iMouse.x/iResolution.x * 3.14);
-    float y = (iMouse.y/iResolution.y * 3.14);
-    return vec3(0., cos(x)  , sin(y));
+    float x = (iMouse.x* 3.14);
+    float y = (iMouse.y* 3.14);
+    return vec3(0., sin(x), cos(y));
 }
 
 vec4 calcRef( in vec3 ro, in vec3 rd, in float mint, in float tmax )

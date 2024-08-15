@@ -50,18 +50,15 @@ let fragmentShader = null
 onMounted(async () => {
   const fragmentShaderSrc = await fetchFragmentShaderSource()
 
-  let mouse = [0, 0];
+  let mouse = [.5, .5];
 
-  document.onmousemove = (e) => {mouse = [e.clientX, e.clientY]};
+  document.onmousemove = (e) => {mouse = [e.clientX / gl.canvas.width, e.clientY / gl.canvas.height]};
   const gl = shaderCanvas.value.getContext('webgl')
   const programInfo = twgl.createProgramInfo(gl, [
     defaultVertexShaderSrc,
     fragmentShaderSrc,
   ])
 
-  //const positionObject = { aPosition: { data: [1, 1, 1, -1, -1, -1, -1, 1], numComponents: 2 } };
-  //const positionBuffer = twgl.createBufferInfoFromArrays(gl, positionObject);
-  
   const arrays = {
     aPosition: [-1, -1, 0, 1, -1, 0, -1, 1, 0, -1, 1, 0, 1, -1, 0, 1, 1, 0],
   }
@@ -76,7 +73,7 @@ onMounted(async () => {
   let tfb = null;
 
   const draw = (time) => {
-    if (twgl.resizeCanvasToDisplaySize(gl.canvas, .1)) {
+    if (twgl.resizeCanvasToDisplaySize(gl.canvas, .2)) {
       // resize the attachments
       twgl.resizeFramebufferInfo(gl, fb1);
       twgl.resizeFramebufferInfo(gl, fb2);

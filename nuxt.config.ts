@@ -3,7 +3,7 @@ import { resolve } from 'path'
 // https://nuxt.com/docs/guide/directory-structure/nuxt.config#nuxt-config-file
 
 export default defineNuxtConfig({
-  compatibilityDate: '2024-08-14',
+  compatibilityDate: '2024-08-15',
 
   modules: ['@nuxt/content', "@nuxt/image"],
   srcDir: 'src/',
