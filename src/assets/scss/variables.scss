@@ -1,0 +1,34 @@
+@use 'sass:map';
+@use 'sass:color';
+
+$red-base: #A80F12;
+$red: (
+  'base': $red-base,
+  'lighten-1': color.scale($red-base, $lightness: +15%),
+  'lighten-2': color.scale($red-base, $lightness: +30%),
+  'lighten-3': color.scale($red-base, $lightness: +45%),
+  'lighten-4': color.scale($red-base, $lightness: +55%),
+  'lighten-5': color.scale($red-base, $lightness: +75%),
+  'darken-1': color.scale($red-base, $lightness: -15%),
+  'darken-2': color.scale($red-base, $lightness: -30%),
+  'darken-3': color.scale($red-base, $lightness: -45%)
+);
+$primary: $red;
+
+
+$shades: (
+  'white': #FFFFFF,
+  'transparent': transparent,
+  'black': color.scale(map.get($primary, 'base'), $lightness: -85%)
+);
+
+$opaque-base: rgba(map.get($primary, 'lighten-4'), .7);
+$opaque: (
+  'base': $opaque-base,
+  'lighten-1': rgba(map.get($primary, 'lighten-4'), .4),
+);
+
+
+$colors : ('opaque': $opaque,
+  'red': $red,
+  'shades': $shades);
