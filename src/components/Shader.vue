@@ -89,7 +89,6 @@ onMounted(async () => {
       iRandom: Math.random(),
       iMouse: mouse,
     }
-    console.info(uniforms)
     gl.useProgram(programInfo.program)
     twgl.setBuffersAndAttributes(gl, programInfo, bufferInfo)
     twgl.setUniforms(programInfo, uniforms)
