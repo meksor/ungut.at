@@ -8,10 +8,6 @@ varying vec2 vPos;
 uniform sampler2D tFrameBuffer;
 varying vec2 vFrameBufferCoord;
 
-float rand (vec2 st) {
-    return fract(sin(dot(st.xy,  vec2(12.9898,78.233))) * 43758.5453123);
-}
-
 mat3 camera(vec3 orientation, float roll) {
     orientation = normalize(orientation);
 	vec3 cp = vec3(sin(roll), cos(roll), 0.0);
@@ -20,11 +16,6 @@ mat3 camera(vec3 orientation, float roll) {
     return mat3( cu, cv, orientation );
 }
 
-float sdPlane( vec3 p, vec3 n, float h )
-{
-  // n must be normalized
-  return dot(p,n) + h;
-}
 
 float sdSphere( vec3 p, float s )
 {
@@ -45,25 +36,14 @@ vec4 opU( vec4 d1, vec4 d2 )
 	return (d1.w<d2.w) ? d1 : d2;
 }
 
-vec4 opSmoothUnion( vec4 d1, vec4 d2, float k )
-{
-    float h = clamp( 0.5 + 0.5*(d1.w-d2.w)/k, 0.0, 1.0 );
-    float d = mix( d1.w, d2.w, h ) - k*h*(1.0-h);
-    return vec4(mix( d1.rgb, d2.rgb, h ), d);
-}
 
 vec4 findHitInScene(vec3 samplePoint) {
     vec3 col1 = vec3(.3);
     vec3 col2 = vec3(.9);
     vec3 col3 = vec3(1., 0., 0.);
-    vec4 torus = vec4(col1, sdTorus(samplePoint-vec3(-15.0, 0.0, 0.0),  vec2(1.2, .5)));
-    vec4 s1 = vec4(col3,sdSphere(samplePoint-vec3(cos(iTime)-5.0, cos(iTime) + sin(iTime/3.), sin(iTime) * sin(iTime/5.)), .2));
-    vec4 s2 = vec4(col3,sdSphere(samplePoint-vec3(-1.0, .5, 2.0), .2));
-    vec4 plane = vec4(col1, sdPlane(samplePoint, normalize(vec3(1.,0.,0.)), 5.));
-    vec4 res = torus;
-    res = opU(res, s1);
-    //res = opU(res, s2);
-    res = opSmoothUnion(res, plane, 1.);
+    vec4 res = vec4(col1, sdTorus(samplePoint-vec3(-3.0, 0.0, 3.0),  vec2(1.2, .5)));
+    res = opU(res, vec4(col3,sdSphere(samplePoint-vec3(-3.0, 0.0, 3.0), .5)));
+    res = opU(res, vec4(col3,sdSphere(samplePoint-vec3(-1.0, .5, 2.0), .2)));
     return res;
 }
 
@@ -111,9 +91,9 @@ float calcAO( in vec3 pos, in vec3 nor )
 }
 
 vec3 getLightDir() {
-    float x = (iMouse.x/iResolution.x * 3.14);
-    float y = (iMouse.y/iResolution.y * 3.14);
-    return vec3(0., cos(x)  , sin(y));
+    float x = (iMouse.x/iResolution.x * 3.14 * 3.);
+    float y = (iMouse.y/iResolution.y * 3.14 * 3.);
+    return vec3(sin(x) , cos(x) , 0.);
 }
 
 vec4 calcRef( in vec3 ro, in vec3 rd, in float mint, in float tmax )
@@ -143,7 +123,7 @@ vec4 calcRef( in vec3 ro, in vec3 rd, in float mint, in float tmax )
         }
     }
 
-    return vec4(vec3(1.), 100.);
+    return vec4(vec3(.5), 100.);
 }
 
 vec3 applyLightModifiers(vec4 traceResult, vec3 ray) {
@@ -160,18 +140,26 @@ vec3 applyLightModifiers(vec4 traceResult, vec3 ray) {
     float align = dot(lightDir, ref);
     float occ = calcAO( pos, normal );
     vec4 shd = calcRef( pos, ref, 0.002, 10. );
-    return (color * shd.rgb - .2*align) - .1*occ;
+    if (color.r < .95) {
+        return (color * shd.rgb - .2*align) - .1*occ;
+
+    } else {
+        return (color *.6 - .2*align) - .2*occ;
+    }
 }
 vec3 render(vec3 ray) {
     vec4 traceResult = trace(ray);
     return vec3(clamp(applyLightModifiers(traceResult, ray), 0.0, 1.0));
+}
+float rand (vec2 st) {
+    return fract(sin(dot(st.xy,  vec2(12.9898,78.233))) * 43758.5453123);
 }
 
 void mainImage (vec2 fragCoord) {
     // Coordinates with the origin in the center of the picture
     vec2 coordinates = fragCoord.xy;
     // vec2 coordinates = (fragCoord.xy);
-    vec3 orientation = vec3(-1. , 0., 0.);
+    vec3 orientation = vec3(-1. , 0., 1.);
     mat3 camOrientationMatrix = camera(orientation, 0.0);
 
     float focalLength = 1.5;
@@ -183,7 +171,7 @@ void mainImage (vec2 fragCoord) {
     color =  pow( color, vec3(0.4545) );
     // gl_FragColor = vec4( coordinates.xyy, 1.);
     float ra = rand(vec2(gl_FragCoord[1], gl_FragCoord[0]) * iRandom);
-    if (ra > .5) {
+    if (ra > .9) {
         gl_FragColor =  vec4( color, 1.);
     } else {
         vec4 last = texture2D(tFrameBuffer, vFrameBufferCoord);

@@ -24,11 +24,13 @@ const shaderCanvas = ref()
 const defaultVertexShaderSrc = `
 precision highp float; 
 varying vec2 vPos;
-attribute vec2 iResolution;
+varying vec2 vFrameBufferCoord;
 
+attribute vec2 iResolution;
 attribute vec3 aPosition;
 void main() { 
-    vPos = (gl_Position = vec4(aPosition,1.0)).xy; 
+  vFrameBufferCoord = (aPosition.xy / 2.) + .5 ; 
+  vPos = (gl_Position = vec4(aPosition,1.0)).xy; 
 }
 `
 const fetchFragmentShaderSource = async () => {
@@ -45,38 +47,64 @@ let fragmentShader = null
 onMounted(async () => {
   const fragmentShaderSrc = await fetchFragmentShaderSource()
 
+  let mouse = [0, 0];
+
+  document.onmousemove = (e) => {mouse = [e.clientX, e.clientY]};
   const gl = shaderCanvas.value.getContext('webgl')
   const programInfo = twgl.createProgramInfo(gl, [
     defaultVertexShaderSrc,
     fragmentShaderSrc,
   ])
 
+  //const positionObject = { aPosition: { data: [1, 1, 1, -1, -1, -1, -1, 1], numComponents: 2 } };
+  //const positionBuffer = twgl.createBufferInfoFromArrays(gl, positionObject);
+  
   const arrays = {
     aPosition: [-1, -1, 0, 1, -1, 0, -1, 1, 0, -1, 1, 0, 1, -1, 0, 1, 1, 0],
   }
+  
   const bufferInfo = twgl.createBufferInfoFromArrays(gl, arrays)
+  const attachments = [
+    { format: gl.RGBA, type: gl.UNSIGNED_BYTE, min: gl.LINEAR, wrap: gl.CLAMP_TO_EDGE },
+    { format: gl.DEPTH_STENCIL, },
+  ];
+  let fb1 = twgl.createFramebufferInfo(gl, attachments);;
+  let fb2 = twgl.createFramebufferInfo(gl, attachments);;
+  let tfb = null;
 
-  // const fbi = twgl.createFramebufferInfo(gl);
   const draw = (time) => {
-    if (twgl.resizeCanvasToDisplaySize(gl.canvas, 0.1)) {
+    if (twgl.resizeCanvasToDisplaySize(gl.canvas, 0.6)) {
       // resize the attachments
-      // twgl.resizeFramebufferInfo(gl, fbi);
+      twgl.resizeFramebufferInfo(gl, fb1);
+      twgl.resizeFramebufferInfo(gl, fb2);
     }    
-    // gl.bindFramebuffer(gl.FRAMEBUFFER, fbi.framebuffer);
     gl.viewport(0, 0, gl.canvas.width, gl.canvas.height)
 
     const uniforms = {
       iTime: time * 0.001,
       iResolution: [gl.canvas.width, gl.canvas.height],
+      tFrameBuffer: fb1.attachments[0],
+      iRandom: Math.random(),
+      iMouse: mouse,
     }
-    gl.useProgram(programInfo.program)
 
+    gl.useProgram(programInfo.program)
     twgl.setBuffersAndAttributes(gl, programInfo, bufferInfo)
     twgl.setUniforms(programInfo, uniforms)
+
+    twgl.bindFramebufferInfo(gl, fb2)
     twgl.drawBufferInfo(gl, bufferInfo)
+    twgl.bindFramebufferInfo(gl, null);
+    twgl.drawBufferInfo(gl, bufferInfo)
+
+    tfb = fb1;
+    fb1 = fb2;
+    fb2 = tfb;
+
     window.requestAnimationFrame(draw)
   }
   window.requestAnimationFrame(draw)
+
 })
 </script>
 
