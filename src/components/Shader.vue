@@ -26,13 +26,14 @@ precision highp float;
 varying vec2 vPos;
 varying vec2 vFrameBufferCoord;
 uniform float iRatio;
+uniform vec2 iAspect;
 
 attribute vec3 aPosition;
 void main() { 
   vec2 pos =  aPosition.xy;
   vFrameBufferCoord = (pos.xy / 2.) + .5; 
   gl_Position = vec4(pos , 0.0, 1.0);
-  vPos = gl_Position.xy * vec2(iRatio, 1.) * 0.1; 
+  vPos = gl_Position.xy * vec2(iAspect.x, iAspect.y) * 0.1; 
 }
 `
 const fetchFragmentShaderSource = async () => {
@@ -81,10 +82,11 @@ onMounted(async () => {
       twgl.resizeFramebufferInfo(gl, fb2);
     }    
     gl.viewport(0, 0, gl.canvas.width, gl.canvas.height)
-
+    let minSide = Math.min(gl.canvas.width, gl.canvas.height)
     const uniforms = {
       iTime: time * 0.001,
       iResolution: [gl.canvas.width, gl.canvas.height],
+      iAspect: [gl.canvas.width/minSide, gl.canvas.height/minSide],
       iRatio: gl.canvas.width / gl.canvas.height,
       tFrameBuffer: fb1.attachments[0],
       iRandom: Math.random(),
