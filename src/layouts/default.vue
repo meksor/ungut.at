@@ -6,7 +6,7 @@
         <slot />
       </div>
       <template #background>
-        <shader  path="assets/shaders/torus.frag"></shader>
+        <shader  path="assets/shaders/torus.txt"></shader>
       </template>
     </fixed-background>
   </div>
