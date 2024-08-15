@@ -10,10 +10,10 @@ export default defineNuxtConfig({
     sources: {
       content: {
         driver: 'fs',
-        prefix: '/articles',
-        base: resolve(__dirname, 'content')
+        prefix: '/projects', // All contents inside this source will be prefixed with `/docs`
+        base: resolve(__dirname, 'content/projects')
       }
     }
-  }
-}
-)
+  },
+  compatibilityDate: '2024-08-14'
+})
