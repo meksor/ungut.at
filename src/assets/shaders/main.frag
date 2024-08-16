@@ -81,6 +81,13 @@ vec4 findHitInScene(vec3 samplePoint) {
     return res;
 }
 
+vec3 background(vec3 ray) {
+    mat3 rot = camera(vec3(1., 1., 1.), iTime/20000.);
+    float pos = dot(ray * rot, vec3(1., 1., .7));
+    float r = step(.99, sin(10000. * pos - cos(15000. *pos)));
+    return vec3(.05, .05, 0.05) * r;
+}
+
 vec4 trace(vec3 ray) {
     float near = 1.0;
     float far = 20.0;
@@ -97,7 +104,7 @@ vec4 trace(vec3 ray) {
         materialColor = hit.rgb;
     }
 
-    if (distance>far) {materialColor = vec3(0.01);}
+    if (distance>far) {materialColor = background(ray);}
     return vec4(materialColor, distance);
 }
 

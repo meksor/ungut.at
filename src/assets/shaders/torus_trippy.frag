@@ -16,7 +16,6 @@ mat3 camera(vec3 orientation, float roll) {
     return mat3( cu, cv, orientation );
 }
 
-
 float sdSphere( vec3 p, float s )
 {
     return length(p)-s;
