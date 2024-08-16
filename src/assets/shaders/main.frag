@@ -67,15 +67,17 @@ float sinc( float x, float k )
 
 vec4 findHitInScene(vec3 samplePoint) {
     vec3 col1 = vec3(.2);
-    vec3 col2 = vec3(.2, .2, .9);
+    vec3 col2 = vec3(.8, .8, .9);
     vec3 col3 = vec3(1., 0., 0.);
     // vec4 torus = vec4(col1, sdTorus(samplePoint-vec3(-15.0, 0.0, 0.0),  vec2(1.2, .5)));
-    vec4 s1 = vec4(col3, sdSphere(samplePoint-vec3(cos(iTime)-10.0, cos(iTime) + sin(iTime/3.), sin(iTime) * sin(iTime/5.) + sin(iTime/2.)), .1));
+    vec4 s1 = vec4(col3 , sdSphere(samplePoint-vec3(cos(iTime)-10.0, cos(iTime) + sin(iTime/3.), sin(iTime) * sin(iTime/5.) + sin(iTime/2.)), .1));
     vec4 s3 = vec4(col3, sdSphere(samplePoint-vec3(sin(iTime)-10.5, sin(iTime) + sin(iTime/5.), sin(iTime) * sin(iTime/3.) + sin(iTime/2.)), .1));
-    vec4 s2 = vec4(col2, sdSphere(samplePoint-vec3(-10.5, 0., 0.0), .1 + .3 * sinc(sin(iTime/3.), sin(iTime))));
-    vec4 plane = vec4(col1, sdPlane(samplePoint, normalize(vec3(1.,0.,0.)), 5.));
+
+    float s2size = .5 + sinc(sin(iTime/5.), sin(iTime/2.)) * .3;
+    float s2col = step(.5, sin(290. * dot(normalize(samplePoint), normalize(vec3(sin(iTime/20.), cos(iTime/20.), 1.))))) * .5;
+    vec4 s2 = vec4(vec3(s2col), sdSphere(samplePoint-vec3(-10.5, 0., 0.0), .1 + .3 * s2size));
     vec4 res = s1;
-    res = opU(res, s2);
+    res = opSmoothUnion(res, s2, .9);
     res = opSmoothUnion(res, s3, .5);
     res = opSmoothUnion(res, s2, .5);
     return res;
@@ -204,7 +206,7 @@ void mainImage (vec2 fragCoord) {
     color =  pow( color, vec3(0.4545) );
     // gl_FragColor = vec4( coordinates.xyy, 1.);
     float ra = rand(vec2(gl_FragCoord[1], gl_FragCoord[0]) * iRandom);
-    if (ra > .9) {
+    if (ra > .1) {
         gl_FragColor =  vec4( color, 1.);
     } else {
         vec4 last = texture2D(tFrameBuffer, vFrameBufferCoord);
