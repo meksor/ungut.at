@@ -17,14 +17,4 @@ export default defineNuxtConfig({
       }
     }
   },
-  hooks: {
-    "webpack:config"(configs) {
-      configs[0].module.rules.push({
-        test: /\.frag$/,
-        type: "asset/resource",
-      });
-
-    },
-},
-
 })
