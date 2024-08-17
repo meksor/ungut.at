@@ -17,7 +17,7 @@ $primary: $red;
 
 
 $shades: (
-  'white': #FFFFFF,
+  'white': #FFFFFFAC,
   'transparent': transparent,
   'black': color.scale(map.get($primary, 'base'), $lightness: -85%)
 );
@@ -32,3 +32,20 @@ $opaque: (
 $colors : ('opaque': $opaque,
   'red': $red,
   'shades': $shades);
+
+$spacing-base: 4px;
+$spacing: (
+  'xs': 1 * $spacing-base,
+  'sm': 2 * $spacing-base,
+  'md': 4 * $spacing-base,
+  'lg': 8 * $spacing-base,
+  'xl': 16 * $spacing-base,
+);
+$rounding-base: 2px;
+$rounding: (
+  '1': 1 * $rounding-base,
+  '2': 2 * $rounding-base,
+  '3': 4 * $rounding-base,
+  '4': 8 * $rounding-base,
+  '5': 16 * $rounding-base,
+);

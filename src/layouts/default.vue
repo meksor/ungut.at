@@ -10,3 +10,11 @@
     </fixed-background>
   </div>
 </template>
+
+<style>
+* {
+  overflow: overlay;
+  margin: 0;
+  padding: 0;
+}
+</style>

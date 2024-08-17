@@ -1,4 +1,18 @@
 <template>
-    <div style="height: 1000vh"></div>    
+    <div style="height: 100vh; position: relative;">  
+        <main-menu></main-menu>
+    </div>  
+    <div style="height: 100vh">
+    </div>    
 </template>
 
+
+<style lang="scss">
+@import '@/assets/scss/variables.scss';
+
+.main-menu {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+</style>

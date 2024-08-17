@@ -8,6 +8,7 @@ export default defineNuxtConfig({
   modules: ['@nuxt/content', "@nuxt/image"],
   srcDir: 'src/',
   ssr: false,
+  css: ["@/assets/scss/fonts.scss"],
   content: {
     sources: {
       content: {

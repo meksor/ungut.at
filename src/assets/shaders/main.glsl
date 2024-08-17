@@ -80,14 +80,14 @@ vec4 findHitInScene(vec3 samplePoint) {
     samplePoint = vec3(samplePoint.x, samplePoint.y - iScroll.y, samplePoint.z);
     vec3 col1 = vec3(.2);
     vec3 col2 = vec3(.8, .8, .9);
-    vec3 col3 = vec3(1., 0., 0.);
+    vec3 col3 = vec3(0.95, 0.01, 0.02);
     // vec4 torus = vec4(col1, sdTorus(samplePoint-vec3(-15.0, 0.0, 0.0),  vec2(1.2, .5)));
     vec4 s1 = vec4(col3 , sdSphere(samplePoint-vec3(cos(iTime)-10.0, cos(iTime) + sin(iTime/3.), sin(iTime) * sin(iTime/5.) + sin(iTime/2.)), .1));
     vec4 s3 = vec4(col3, sdSphere(samplePoint-vec3(sin(iTime)-10.5, sin(iTime) + sin(iTime/5.), sin(iTime) * sin(iTime/3.) + sin(iTime/2.)), .1));
 
     float s2size = .3 + sinc(sin(iTime/5.), sin(iTime/2.)) * .3;
     float s2col = step(.9, sin(290. * dot(normalize(samplePoint), normalize(vec3(sin(iTime/20.), cos(iTime/20.), 3.))))) * .5;
-    vec4 s2 = vec4(vec3(s2col), sdSphere(samplePoint-vec3(-10.5, 0., 0.0), .1 + .3 * s2size));
+    vec4 s2 = vec4(vec3(s2col, s2col,max(s2col, .12)), sdSphere(samplePoint-vec3(-10.5, 0., 0.0), .1 + .3 * s2size));
     vec4 res = s1;
     res = opSmoothUnion(res, s2, .9);
     res = opSmoothUnion(res, s3, .5);
@@ -123,7 +123,7 @@ vec4 trace(vec3 ray) {
 }
 
 vec3 calcHitNormal(vec3 samplePoint) {
-    vec2 eps = vec2(1.0,-1.0)*0.1;
+    vec2 eps = vec2(1.0,-1.0)*0.2123;
     return normalize( eps.xyy*findHitInScene( samplePoint + eps.xyy ).w +
 					  eps.yyx*findHitInScene( samplePoint + eps.yyx ).w +
 					  eps.yxy*findHitInScene( samplePoint + eps.yxy ).w +
@@ -146,10 +146,10 @@ float calcAO( in vec3 pos, in vec3 nor )
 }
 
 vec3 getLightDir() {
-    return vec3(.1, 0.2, 0.);
-    float x = (iTime* 3.14 / 2.);
-    float y = (iTime* 3.14 / 2.);
-    return vec3(0., sin(x), cos(y));
+        
+    float x = tan(iMouse.y * 3.14);
+    float y = sin(iMouse.x * 3.14);
+    return normalize(vec3(-1., x, y));
 }
 
 vec4 calcRef( in vec3 ro, in vec3 rd, in float mint, in float tmax )
@@ -161,7 +161,7 @@ vec4 calcRef( in vec3 ro, in vec3 rd, in float mint, in float tmax )
     float t = mint;
     for( int i=0; i<24; i++ )
     {
-		vec4 h = findHitInScene( ro + rd*t );
+		vec4 h = findHitInScene( ro + rd*t);
         float s = clamp(8.0*h.w/t,0.0,1.0);
         res = min( res, s );
         t += clamp( h.w, 0.01, 0.2 );
@@ -195,9 +195,9 @@ vec3 applyLightModifiers(vec4 traceResult, vec3 ray) {
     vec3 ref = reflect(ray, normal);
     float align = dot(lightDir, ref);
     float occ = calcAO( pos, normal );
-    vec4 shd = calcRef( pos, ref, 0.002, 10. );
+    vec4 shd = calcRef(pos, ref, 0.02, 10.);
     color = color * shd.rgb + shd.rgb *.05;
-    return (color + .2*align) - .1*occ;
+    return (color + .4*align) - .4*occ;
 }
 vec3 render(vec3 ray) {
     vec4 traceResult = trace(ray);

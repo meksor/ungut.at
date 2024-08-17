@@ -1,16 +1,14 @@
 <template>
-    <div id="foreground">
-      <slot/>
-    </div>
+  <div id="foreground">
+    <slot/>
+  </div>
 
-    <div id="background">
-      <slot name="background" />
-    </div>
-
+  <div id="background">
+    <slot name="background" />
+  </div>
 </template>
 
 <style lang="scss">
-@import '@/assets/scss/variables.scss';
 
 #foreground {
   z-index: 20;

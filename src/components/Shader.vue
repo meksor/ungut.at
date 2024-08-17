@@ -54,7 +54,7 @@ let fragmentShader = null
 
 onMounted(async () => {
   const fragmentShaderSrc = await fetchFragmentShaderSource()
-  let mouse = [0., 0.];
+  let mouse = [0.001, 0.001];
   let scrollPos = [0., 0.];
 
   document.onmousemove = (e) => {
@@ -105,7 +105,7 @@ onMounted(async () => {
       iMouse: mouse,
       iScroll: scrollPos,
     }
-    console.debug(uniforms)
+    // console.debug(uniforms)
     gl.useProgram(programInfo.program)
     twgl.setBuffersAndAttributes(gl, programInfo, bufferInfo)
     twgl.setUniforms(programInfo, uniforms)
