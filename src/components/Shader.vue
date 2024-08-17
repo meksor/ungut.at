@@ -44,7 +44,9 @@ const fetchFragmentShaderSource = async () => {
   console.info('Fetched fragment shader source')
   try {
      // workaround for github pages serving .frag files as b64
-    return atob(res);
+     console.log(res)
+     console.log(atob(res))
+     return atob(res);
   } catch(e) {
     return res;
   }
