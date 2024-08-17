@@ -6,10 +6,20 @@ varying vec2 vPos;
 
 uniform sampler2D tFrameBuffer;
 varying vec2 vFrameBufferCoord;
+float blendScreen(float base, float blend) {
+	return 1.0-((1.0-base)*(1.0-blend));
+}
 
+vec3 blendScreen(vec3 base, vec3 blend) {
+	return vec3(blendScreen(base.r,blend.r),blendScreen(base.g,blend.g),blendScreen(base.b,blend.b));
+}
+
+vec3 blendScreen(vec3 base, vec3 blend, float opacity) {
+	return (blendScreen(base, blend) * opacity + base * (1.0 - opacity));
+}
 float rand (vec2 st) {
-   // return fract(sin(dot(st.xy,  vec2(12.9898,78.233))) * 43758.5453123);
-   return tan(dot(st.xy,  vec2(sin(iTime),cos(iTime))));
+   return fract(sin(dot(st.xy,  vec2(12.9898,78.233))) * 43758.5453123);
+   //return tan(dot(st.xy,  vec2(1.)));
 }
 
 mat3 camera(vec3 orientation, float roll) {
@@ -73,8 +83,8 @@ vec4 findHitInScene(vec3 samplePoint) {
     vec4 s1 = vec4(col3 , sdSphere(samplePoint-vec3(cos(iTime)-10.0, cos(iTime) + sin(iTime/3.), sin(iTime) * sin(iTime/5.) + sin(iTime/2.)), .1));
     vec4 s3 = vec4(col3, sdSphere(samplePoint-vec3(sin(iTime)-10.5, sin(iTime) + sin(iTime/5.), sin(iTime) * sin(iTime/3.) + sin(iTime/2.)), .1));
 
-    float s2size = .5 + sinc(sin(iTime/5.), sin(iTime/2.)) * .3;
-    float s2col = step(.5, sin(290. * dot(normalize(samplePoint), normalize(vec3(sin(iTime/20.), cos(iTime/20.), 1.))))) * .5;
+    float s2size = .3 + sinc(sin(iTime/5.), sin(iTime/2.)) * .3;
+    float s2col = step(.9, sin(290. * dot(normalize(samplePoint), normalize(vec3(sin(iTime/20.), cos(iTime/20.), 3.))))) * .5;
     vec4 s2 = vec4(vec3(s2col), sdSphere(samplePoint-vec3(-10.5, 0., 0.0), .1 + .3 * s2size));
     vec4 res = s1;
     res = opSmoothUnion(res, s2, .9);
@@ -84,9 +94,9 @@ vec4 findHitInScene(vec3 samplePoint) {
 }
 
 vec3 background(vec3 ray) {
-    mat3 rot = camera(vec3(1., 1., 1.), iTime/20000.);
-    float pos = dot(ray * rot, vec3(1., 1., .7));
-    float r = step(.99, sin(10000. * pos - cos(15000. *pos)));
+    mat3 rot = camera(vec3(1., 1., 1.), sin(iTime/314000.));
+    float pos = dot(rot * ray, vec3(1.2, 0., 0.35));
+    float r = step(.999, sin(10000. * pos - cos(15000. *pos)));
     return vec3(.05, .05, 0.05) * r;
 }
 
@@ -134,8 +144,9 @@ float calcAO( in vec3 pos, in vec3 nor )
 }
 
 vec3 getLightDir() {
-    float x = (iMouse.x* 3.14);
-    float y = (iMouse.y* 3.14);
+    return vec3(.1, 0.2, 0.);
+    float x = (iTime* 3.14 / 2.);
+    float y = (iTime* 3.14 / 2.);
     return vec3(0., sin(x), cos(y));
 }
 
@@ -159,7 +170,7 @@ vec4 calcRef( in vec3 ro, in vec3 rd, in float mint, in float tmax )
 
             vec3 ref = reflect(rd, normal);
             float align = dot(lightDir, ref);
-            return h - .5 * align;
+            return h + .2 * align;
         };
         if (t>tmax) {
             break;
@@ -183,7 +194,8 @@ vec3 applyLightModifiers(vec4 traceResult, vec3 ray) {
     float align = dot(lightDir, ref);
     float occ = calcAO( pos, normal );
     vec4 shd = calcRef( pos, ref, 0.002, 10. );
-    return (color * shd.rgb - .2*align) - .1*occ;
+    color = color * shd.rgb + shd.rgb *.05;
+    return (color + .2*align) - .1*occ;
 }
 vec3 render(vec3 ray) {
     vec4 traceResult = trace(ray);
@@ -194,7 +206,10 @@ void mainImage (vec2 fragCoord) {
     // Coordinates with the origin in the center of the picture
     vec2 coordinates = fragCoord.xy;
     // vec2 coordinates = (fragCoord.xy);
-    vec3 orientation = vec3(-1. , 0., 0.);
+    
+    float y = iMouse.y * .01;
+    float z = iMouse.x * .01;
+    vec3 orientation = normalize(vec3(-1., y, z));
     mat3 camOrientationMatrix = camera(orientation, 0.0);
 
     float focalLength = 1.5;
@@ -206,11 +221,11 @@ void mainImage (vec2 fragCoord) {
     color =  pow( color, vec3(0.4545) );
     // gl_FragColor = vec4( coordinates.xyy, 1.);
     float ra = rand(vec2(gl_FragCoord[1], gl_FragCoord[0]) * iRandom);
-    if (ra > .1) {
+    vec4 last = texture2D(tFrameBuffer, vFrameBufferCoord);
+    if (ra > .8) {
         gl_FragColor =  vec4( color, 1.);
     } else {
-        vec4 last = texture2D(tFrameBuffer, vFrameBufferCoord);
-        gl_FragColor = vec4( mix(color, last.rgb, .9), 1.);
+        gl_FragColor = vec4( last.rgb, 1.);
         // gl_FragColor = vec4( vPos / iResolution, 1, 1);
     }
 

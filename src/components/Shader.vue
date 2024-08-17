@@ -54,9 +54,13 @@ let fragmentShader = null
 
 onMounted(async () => {
   const fragmentShaderSrc = await fetchFragmentShaderSource()
-  let mouse = [.5, .5];
+  let mouse = [0., 0.];
 
-  document.onmousemove = (e) => {mouse = [e.clientX / gl.canvas.width, e.clientY / gl.canvas.height]};
+  document.onmousemove = (e) => {
+    const x = (e.clientX / document.documentElement.clientWidth) -.5;
+    const y = (e.clientY / document.documentElement.clientHeight) -.5;
+    mouse = [x, y]
+  };
   const gl = shaderCanvas.value.getContext('webgl')
   const programInfo = twgl.createProgramInfo(gl, [
     defaultVertexShaderSrc,
@@ -93,6 +97,7 @@ onMounted(async () => {
       iRandom: Math.random(),
       iMouse: mouse,
     }
+    console.debug(uniforms)
     gl.useProgram(programInfo.program)
     twgl.setBuffersAndAttributes(gl, programInfo, bufferInfo)
     twgl.setUniforms(programInfo, uniforms)
