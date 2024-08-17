@@ -1,5 +1,5 @@
 <template>
-    <div style="height: 100vh; position: relative;">  
+    <div style="height: 100dvh; position: relative;">  
         <main-menu></main-menu>
     </div>  
     <div style="min-height: 100vh">
