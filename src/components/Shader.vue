@@ -81,7 +81,7 @@ onMounted(async () => {
   let tfb = null;
 
   const draw = (time: number) => {
-    if (twgl.resizeCanvasToDisplaySize(gl.canvas, .25)) {
+    if (twgl.resizeCanvasToDisplaySize(gl.canvas, .15)) {
       // resize the attachments
       twgl.resizeFramebufferInfo(gl, fb1);
       twgl.resizeFramebufferInfo(gl, fb2);
