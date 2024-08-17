@@ -40,14 +40,12 @@ const fetchFragmentShaderSource = async () => {
   const shaderUrl = new URL(`/${props.path}`, import.meta.url).href
   console.info(`Fetching fragment shader source from '${shaderUrl}'`)
 
-  const res : string = await $fetch(shaderUrl)
+  const res : string | Blob = await $fetch(shaderUrl)
   console.info('Fetched fragment shader source')
-  try {
+  if (res instanceof Blob) {
      // workaround for github pages serving .frag files as b64
-     console.log(res)
-     console.log(atob(res))
-     return atob(res);
-  } catch(e) {
+     return atob(await res.text());
+  } else {
     return res;
   }
 }
