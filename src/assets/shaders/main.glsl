@@ -1,5 +1,6 @@
 precision highp float;
 uniform vec2 iMouse;
+uniform vec2 iScroll;
 uniform float iTime;
 uniform float iRandom;
 varying vec2 vPos;
@@ -76,6 +77,7 @@ float sinc( float x, float k )
 }
 
 vec4 findHitInScene(vec3 samplePoint) {
+    samplePoint = vec3(samplePoint.x, samplePoint.y - iScroll.y, samplePoint.z);
     vec3 col1 = vec3(.2);
     vec3 col2 = vec3(.8, .8, .9);
     vec3 col3 = vec3(1., 0., 0.);
@@ -107,7 +109,7 @@ vec4 trace(vec3 ray) {
     float distance = near;
     vec3 materialColor = vec3(.2,.2,.2);
 
-    for (int i=0; i<128; i++) {
+    for (int i=0; i<64; i++) {
 	    float error = 0.0004*distance;
 
 	    vec4 hit = findHitInScene(ray * distance);

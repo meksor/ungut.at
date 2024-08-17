@@ -55,11 +55,18 @@ let fragmentShader = null
 onMounted(async () => {
   const fragmentShaderSrc = await fetchFragmentShaderSource()
   let mouse = [0., 0.];
+  let scrollPos = [0., 0.];
 
   document.onmousemove = (e) => {
     const x = (e.clientX / document.documentElement.clientWidth) -.5;
     const y = (e.clientY / document.documentElement.clientHeight) -.5;
     mouse = [x, y]
+  };
+  document.onscroll = (e) => {
+    scrollPos = [
+      window.scrollX / document.documentElement.clientWidth, 
+      window.scrollY / document.documentElement.clientHeight
+    ]
   };
   const gl = shaderCanvas.value.getContext('webgl')
   const programInfo = twgl.createProgramInfo(gl, [
@@ -96,6 +103,7 @@ onMounted(async () => {
       tFrameBuffer: fb1.attachments[0],
       iRandom: Math.random(),
       iMouse: mouse,
+      iScroll: scrollPos,
     }
     console.debug(uniforms)
     gl.useProgram(programInfo.program)
