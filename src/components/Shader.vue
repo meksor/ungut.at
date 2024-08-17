@@ -12,7 +12,7 @@ interface Texture {
 interface Props {
   path: string
   textures?: Texture[]
-  backBuffer?: bool
+  backBuffer?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -40,20 +40,20 @@ const fetchFragmentShaderSource = async () => {
   const shaderUrl = new URL(`/${props.path}`, import.meta.url).href
   console.info(`Fetching fragment shader source from '${shaderUrl}'`)
 
-  const { data: shaderSrc } = await useFetch(shaderUrl, {
-    headers: {
-      Accept: 'text/plain'
-    }
-  })
+  const res : string = await $fetch(shaderUrl)
   console.info('Fetched fragment shader source')
-  return shaderSrc.value
+  try {
+     // workaround for github pages serving .frag files as b64
+    return atob(res);
+  } catch(e) {
+    return res;
+  }
 }
 let vertexShader = null
 let fragmentShader = null
 
 onMounted(async () => {
   const fragmentShaderSrc = await fetchFragmentShaderSource()
-
   let mouse = [.5, .5];
 
   document.onmousemove = (e) => {mouse = [e.clientX / gl.canvas.width, e.clientY / gl.canvas.height]};
@@ -76,7 +76,7 @@ onMounted(async () => {
   let fb2 = twgl.createFramebufferInfo(gl, attachments);;
   let tfb = null;
 
-  const draw = (time) => {
+  const draw = (time: number) => {
     if (twgl.resizeCanvasToDisplaySize(gl.canvas, .25)) {
       // resize the attachments
       twgl.resizeFramebufferInfo(gl, fb1);
