@@ -40,7 +40,11 @@ const fetchFragmentShaderSource = async () => {
   const shaderUrl = new URL(`/${props.path}`, import.meta.url).href
   console.info(`Fetching fragment shader source from '${shaderUrl}'`)
 
-  const { data: shaderSrc } = await useFetch(shaderUrl)
+  const { data: shaderSrc } = await useFetch(shaderUrl, {
+    headers: {
+      Accept: 'text/plain'
+    }
+  })
   console.info('Fetched fragment shader source')
   return shaderSrc.value
 }

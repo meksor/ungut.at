@@ -5,7 +5,7 @@
         <slot />
       </div>
       <template #background>
-        <shader path="assets/shaders/main.txt"></shader>
+        <shader path="assets/shaders/main.frag"></shader>
       </template>
     </fixed-background>
   </div>
