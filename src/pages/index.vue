@@ -3,9 +3,10 @@
         <main-menu></main-menu>
     </div>  
     <div style="height: 100vh">
+        <imprint></imprint>
     </div>    
 </template>
-
+    
 
 <style lang="scss">
 @import '@/assets/scss/variables.scss';

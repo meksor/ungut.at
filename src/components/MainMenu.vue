@@ -8,7 +8,7 @@
         Info
       </nuxt-link> -->
       <nuxt-link to="#">
-        ???
+        <h1>???</h1>
       </nuxt-link>
     </div>
   </div>
@@ -30,7 +30,6 @@
 
   a {
     margin: 0 map-get($spacing, 'xl');
-    font-size: 2.7rem;
     text-decoration: none;
     color: map-get($shades, 'white');
   }
