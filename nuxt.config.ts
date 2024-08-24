@@ -13,7 +13,7 @@ export default defineNuxtConfig({
     sources: {
       content: {
         driver: 'fs',
-        prefix: '/projects', // All contents inside this source will be prefixed with `/docs`
+        prefix: 'projects',
         base: resolve(__dirname, 'content/projects')
       }
     }
