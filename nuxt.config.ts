@@ -10,6 +10,7 @@ export default defineNuxtConfig({
   ssr: false,
   css: ["@/assets/scss/fonts.scss"],
   content: {
+    documentDriven: true,
     sources: {
       content: {
         driver: 'fs',
