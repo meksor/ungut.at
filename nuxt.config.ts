@@ -5,21 +5,20 @@ export default defineNuxtConfig({
 
   modules: ['@nuxt/content', "@nuxt/image", '@nuxthq/studio'],
   srcDir: 'src/',
-  ssr: false,
+  ssr: true,
+  routeRules: {
+    '/**': { prerender: true, ssr: true },
+  },
   css: ["@/assets/scss/fonts.scss", "@/assets/scss/utils.scss"],
   content: {
     documentDriven: true,
     sources: {
-      projects: {
-        driver: 'fs',
-        prefix: 'projects', 
-        base: resolve(__dirname, 'content/projects')
-      },
       global: {
         driver: 'fs',
-        prefix: 'global', 
-        base: resolve(__dirname, 'content/global')
-      }
+        prefix: '', 
+        base: resolve(__dirname, 'content')
+      },
+      
     }
   },
   vite: {
