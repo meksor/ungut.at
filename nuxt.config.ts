@@ -8,18 +8,31 @@ export default defineNuxtConfig({
   modules: ['@nuxt/content', "@nuxt/image"],
   srcDir: 'src/',
   ssr: false,
-  css: ["@/assets/scss/fonts.scss"],
+  css: ["@/assets/scss/fonts.scss", "@/assets/scss/utils.scss"],
   content: {
     sources: {
-      content: {
+      projects: {
         driver: 'fs',
-        prefix: '/projects', // All contents inside this source will be prefixed with `/docs`
+        prefix: '/projects', 
         base: resolve(__dirname, 'content/projects')
+      },
+      global: {
+        driver: 'fs',
+        prefix: '/global', 
+        base: resolve(__dirname, 'content/global')
       }
     }
   },
   vite: {
     build: {
-    }
+    },
+    css: {
+      preprocessorOptions: {
+        sass: {
+          additionalData: '@import "@/assets/scss/variables.scss"',
+        },
+      },
+    },
   }
 })
+

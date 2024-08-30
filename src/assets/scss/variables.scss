@@ -35,12 +35,13 @@ $colors : ('opaque': $opaque,
 
 $spacing-base: 4px;
 $spacing: (
-  'xs': 1 * $spacing-base,
-  'sm': 2 * $spacing-base,
-  'md': 4 * $spacing-base,
-  'lg': 8 * $spacing-base,
-  'xl': 16 * $spacing-base,
+  '1': 1 * $spacing-base,
+  '2': 2 * $spacing-base,
+  '3': 4 * $spacing-base,
+  '4': 8 * $spacing-base,
+  '5': 16 * $spacing-base,
 );
+
 $rounding-base: 2px;
 $rounding: (
   '1': 1 * $rounding-base,
@@ -48,4 +49,35 @@ $rounding: (
   '3': 4 * $rounding-base,
   '4': 8 * $rounding-base,
   '5': 16 * $rounding-base,
+);
+
+$breakpoints: (
+  xs: (
+    min-width: 0px,
+    max-width: 600px,
+  ),
+  sm: (
+    min-width: 600px,
+    max-width: 960px,
+  ),
+  md: (
+    min-width: 960px,
+    max-width: 1264px,
+  ),
+  lg: (
+    min-width: 1264px,
+    max-width: 1904px,
+  ),
+  xl: (
+    min-width: 1904px,
+  ),
+);
+
+$coordsArray: (
+  y: y,
+  x: x,
+  r: right,
+  l: left,
+  t: top,
+  b: bottom,
 );

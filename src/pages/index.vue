@@ -1,9 +1,11 @@
 <template>
     <div style="height: 100dvh; position: relative;">  
-        <main-menu></main-menu>
+        <main-menu class="mb-2" ></main-menu>
     </div>  
-    <div style="min-height: 100vh">
-        <imprint></imprint>
+    <div style="min-height: 100vh" >
+        <div class="m-4 m-md-up-16">
+            <imprint ></imprint>
+        </div>
     </div>    
 </template>
 

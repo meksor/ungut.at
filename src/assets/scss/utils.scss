@@ -1,0 +1,106 @@
+@import '@/assets/scss/variables.scss';
+
+@function spacing($unit) {
+  @return calc(#{$unit} * 0.5rem);
+}
+
+@mixin set-coordinates($defaultProp, $coordinate, $size) {
+  @if $coordinate == 'y' {
+    #{$defaultProp}-top: spacing($size);
+    #{$defaultProp}-bottom: spacing($size);
+  } @else if $coordinate == 'x' {
+    #{$defaultProp}-left: spacing($size);
+    #{$defaultProp}-right: spacing($size);
+  } @else {
+    #{$defaultProp}-#{$coordinate}: spacing($size);
+  }
+}
+
+// Mixin to generate classes for a given property with optional coordinates
+@mixin class-by-prop($defaultProp, $propName, $useCoords) {
+  // Define the maximum iteration value
+  $max-iteration: 64;
+// Loop through the sizes from 0 to the maximum iteration
+  @for $size from 0 through $max-iteration {
+    // Generate a base class for the given property and size
+    .#{$propName}-#{$size} {
+      #{$defaultProp}: spacing($size);
+    }
+    // If useCoords is true, generate classes with different coordinates
+    @if $useCoords {
+      @each $keyCoordinate, $coordinate in $coordsArray {
+        .#{$propName}#{$keyCoordinate}-#{$size} {
+          @include set-coordinates($defaultProp, $coordinate, $size);
+        }
+      }
+    }
+  }
+  // Loop through the breakpoints and generate media queries
+  @each $keyBreakpoint, $media-query in $breakpoints {
+    // Check if it's not the 'xl' breakpoint
+    @if $keyBreakpoint != 'xl' {
+      @media (min-width: #{map-get($media-query, min-width)}) and (max-width: #{map-get($media-query, max-width)}) {
+        // Loop through the sizes again and generate classes for the current breakpoint
+        @for $size from 0 through $max-iteration {
+          .#{$propName}-#{$keyBreakpoint}-#{$size} {
+            #{$defaultProp}: spacing($size);
+          }
+          // If useCoords is true, generate classes with different coordinates for the current breakpoint
+          @if $useCoords {
+            @each $keyCoordinate, $coordinate in $coordsArray {
+              .#{$propName}#{$keyCoordinate}-#{$keyBreakpoint}-#{$size} {
+                @include set-coordinates($defaultProp, $coordinate, $size);
+              }
+            }
+          }
+        }
+      }
+    } @else {
+      // For 'xl' breakpoint (no max-width specified), generate classes without a max-width condition
+      @media (min-width: #{map-get($media-query, min-width)}) {
+        // Loop through the sizes again and generate classes for the 'xl' breakpoint
+        @for $size from 0 through $max-iteration {
+          .#{$propName}-#{$keyBreakpoint}-#{$size} {
+            #{$defaultProp}: spacing($size);
+          }
+          // If useCoords is true, generate classes with different coordinates for the 'xl' breakpoint
+          @if $useCoords {
+            @each $keyCoordinate, $coordinate in $coordsArray {
+              .#{$propName}#{$keyCoordinate}-#{$keyBreakpoint}-#{$size} {
+                @include set-coordinates($defaultProp, $coordinate, $size);
+              }
+            }
+          }
+        }
+      }
+    }
+    // Apply media queries for sm-up breakpoint and up
+    @media (min-width: #{map-get($media-query, min-width)}) {
+      // Loop through the sizes again and generate classes for the 'sm-up' breakpoint
+      @for $size from 0 through $max-iteration {
+        .#{$propName}-#{$keyBreakpoint}-up-#{$size} {
+          #{$defaultProp}: spacing($size);
+        }
+        // If useCoords is true, generate classes with different coordinates for the 'sm-up' breakpoint
+        @if $useCoords {
+          @each $keyCoordinate, $coordinate in $coordsArray {
+            .#{$propName}#{$keyCoordinate}-#{$keyBreakpoint}-up-#{$size} {
+              @include set-coordinates($defaultProp, $coordinate, $size);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Generate margin classes with comments
+@include class-by-prop('margin', 'm', true);
+// Generate padding classes with comments
+@include class-by-prop('padding', 'p', true);
+
+// Generate padding classes with comments
+@include class-by-prop('padding', 'p', true);
+
+// Generate font-size classes with comments
+@include class-by-prop('font-size', 'fs', false);
