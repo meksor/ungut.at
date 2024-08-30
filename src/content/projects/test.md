@@ -1,7 +1,9 @@
 ---
-layout: project
+layout: default
+date: '2024-01-01'
+title: Test
 ---
 
-# Test
+This is a test.
 
-test test
+With multiple lines.
