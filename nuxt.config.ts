@@ -1,7 +1,5 @@
 import { resolve } from 'path'
 
-// https://nuxt.com/docs/guide/directory-structure/nuxt.config#nuxt-config-file
-
 export default defineNuxtConfig({
   compatibilityDate: '2024-08-15',
 
@@ -14,12 +12,12 @@ export default defineNuxtConfig({
     sources: {
       projects: {
         driver: 'fs',
-        prefix: '/projects', 
+        prefix: 'projects', 
         base: resolve(__dirname, 'content/projects')
       },
       global: {
         driver: 'fs',
-        prefix: '/global', 
+        prefix: 'global', 
         base: resolve(__dirname, 'content/global')
       }
     }
