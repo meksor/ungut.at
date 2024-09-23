@@ -5,7 +5,12 @@
 }
 
 @mixin set-coordinates($defaultProp, $coordinate, $size) {
-  @if $coordinate == 'y' {
+  @if $coordinate == 'a' {
+    #{$defaultProp}-top: spacing($size);
+    #{$defaultProp}-bottom: spacing($size);
+    #{$defaultProp}-left: spacing($size);
+    #{$defaultProp}-right: spacing($size);
+  } @else if $coordinate == 'y' {
     #{$defaultProp}-top: spacing($size);
     #{$defaultProp}-bottom: spacing($size);
   } @else if $coordinate == 'x' {
@@ -104,3 +109,58 @@
 
 // Generate font-size classes with comments
 @include class-by-prop('font-size', 'fs', false);
+
+@include class-by-prop('--elevation', 'el', false);
+
+// Width / Height helpers
+$one-hundred: 100;
+
+@for $percent from 0 through $one-hundred {
+  .h-#{$percent} {
+    height: $percent * 1%;
+  }
+  .w-#{$percent} {
+    width: $percent * 1%;
+  }
+}
+
+@each $name, $value in $dimension-dividers {
+  .h-#{$name} {
+    height: $value * 100%;
+  }
+  .w-#{$name} {
+    width: $value * 100%;
+  }
+
+  @each $bp, $media-query in $breakpoints {
+    @media (min-width: #{map-get($media-query, min-width)}) {
+      .h-#{$name}-#{$bp}-up {
+        height: $value * 100%;
+      }
+      .w-#{$name}-#{$bp}-up {
+        width: $value * 100%;
+      }
+    }
+
+    @if $bp != 'xl' {
+      @media (min-width: #{map-get($media-query, min-width)}) and (max-width: #{map-get($media-query, max-width)}) {
+        .h-#{$name}-#{$bp} {
+          height: $value * 100%;
+        }
+        .w-#{$name}-#{$bp} {
+          width: $value * 100%;
+        }
+      }
+    } @else {
+      @media (min-width: #{map-get($media-query, min-width)}) {
+        .h-#{$name}-#{$bp} {
+          height: $value * 100%;
+        }
+        .w-#{$name}-#{$bp} {
+          width: $value * 100%;
+        }
+
+      }
+    }
+  }
+}

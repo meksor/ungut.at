@@ -110,9 +110,9 @@ onMounted(async () => {
     twgl.setBuffersAndAttributes(gl, programInfo, bufferInfo)
     twgl.setUniforms(programInfo, uniforms)
 
-    twgl.bindFramebufferInfo(gl, fb2)
-    twgl.drawBufferInfo(gl, bufferInfo)
     twgl.bindFramebufferInfo(gl, null);
+    twgl.drawBufferInfo(gl, bufferInfo)
+    twgl.bindFramebufferInfo(gl, fb2)
     twgl.drawBufferInfo(gl, bufferInfo)
 
     tfb = fb1;

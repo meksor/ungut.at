@@ -14,7 +14,7 @@
   z-index: 20;
   position: relative;
   min-width: 100vw;
-  min-height: calc(100% + 0px);
+  min-height: 100dvh;
 }
 #background {
   position: fixed;

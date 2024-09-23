@@ -13,11 +13,53 @@ $red: (
   'darken-2': color.scale($red-base, $lightness: -30%),
   'darken-3': color.scale($red-base, $lightness: -45%)
 );
-$primary: $red;
+$blue-base: #1f5bc9;
+$blue: (
+  'base': $blue-base,
+  'lighten-1': color.scale($blue-base, $lightness: +15%),
+  'lighten-2': color.scale($blue-base, $lightness: +30%),
+  'lighten-3': color.scale($blue-base, $lightness: +45%),
+  'lighten-4': color.scale($blue-base, $lightness: +55%),
+  'lighten-5': color.scale($blue-base, $lightness: +75%),
+  'darken-1': color.scale($blue-base, $lightness: -15%),
+  'darken-2': color.scale($blue-base, $lightness: -30%),
+  'darken-3': color.scale($blue-base, $lightness: -45%)
+);
+$primary: $blue;
 
+$grey-base:rgb(94, 94, 112);
+$grey: (
+  'base': $grey-base,
+  'lighten-1': color.scale($grey-base, $lightness: +15%),
+  'lighten-2': color.scale($grey-base, $lightness: +30%),
+  'lighten-3': color.scale($grey-base, $lightness: +45%),
+  'lighten-4': color.scale($grey-base, $lightness: +55%),
+  'lighten-5': color.scale($grey-base, $lightness: +75%),
+  'darken-1': color.scale($grey-base, $lightness: -15%),
+  'darken-2': color.scale($grey-base, $lightness: -30%),
+  'darken-3': color.scale($grey-base, $lightness: -45%)
+);
 
+$white-base: #f5f5f5;
+$white: (
+  'base': $white-base,
+  'darken-1': color.scale($white-base, $lightness: -15%),
+  'darken-2': color.scale($white-base, $lightness: -30%),
+  'darken-3': color.scale($white-base, $lightness: -45%)
+);
+
+$black-base: #050505;
+$black: (
+  'base': $black-base,  
+  'lighten-1': color.scale($black-base, $lightness: +15%),
+  'lighten-2': color.scale($black-base, $lightness: +30%),
+  'lighten-3': color.scale($black-base, $lightness: +45%),
+  'lighten-4': color.scale($black-base, $lightness: +55%),
+  'lighten-5': color.scale($black-base, $lightness: +75%),
+
+);
 $shades: (
-  'white': #FFFFFFAC,
+  'white': $white-base,
   'transparent': transparent,
   'black': color.scale(map.get($primary, 'base'), $lightness: -85%)
 );
@@ -29,9 +71,15 @@ $opaque: (
 );
 
 
-$colors : ('opaque': $opaque,
+$colors : (
+  'opaque': $opaque,
   'red': $red,
-  'shades': $shades);
+  'grey': $grey,
+  'black': $black,
+  'shades': $shades,
+  'surface': $white,
+  'primary': $grey,
+);
 
 $spacing-base: 4px;
 $spacing: (
@@ -74,6 +122,7 @@ $breakpoints: (
 );
 
 $coordsArray: (
+  a: a,
   y: y,
   x: x,
   r: right,
@@ -81,3 +130,12 @@ $coordsArray: (
   t: top,
   b: bottom,
 );
+
+$dimension-dividers: (
+  half: calc(1 / 2),
+  third: calc(1 / 3),
+  fourth: calc(1 / 4),
+  fifth: calc(1 / 5),
+  sixth: calc(1 / 6),
+);
+

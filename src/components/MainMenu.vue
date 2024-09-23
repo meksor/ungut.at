@@ -7,7 +7,7 @@
       <nuxt-link to="#info">
         Info
       </nuxt-link> -->
-      <nuxt-link to="#">
+      <nuxt-link to="works/">
         <h1>???</h1>
       </nuxt-link>
     </div>

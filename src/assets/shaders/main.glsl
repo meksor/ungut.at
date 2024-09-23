@@ -31,25 +31,10 @@ mat3 camera(vec3 orientation, float roll) {
     return mat3( cu, cv, orientation );
 }
 
-float sdPlane( vec3 p, vec3 n, float h )
-{
-  // n must be normalized
-  return dot(p,n) + h;
-}
-
 float sdSphere( vec3 p, float s )
 {
     return length(p)-s;
 }
-
-
-float sdTorus( vec3 p, vec2 t )
-{
-    mat3 mat = camera(vec3(sin(iTime/2.) * 3., cos(iTime/6.) * 3., 1.), 0.0);
-    p = p*mat;
-    return length( vec2(length(p.xy)-t.x,p.z) )-t.y;
-}
-
 
 vec4 opU( vec4 d1, vec4 d2 )
 {
@@ -81,11 +66,14 @@ vec4 findHitInScene(vec3 samplePoint) {
     vec3 col1 = vec3(.2);
     vec3 col2 = vec3(.8, .8, .9);
     vec3 col3 = vec3(0.95, 0.01, 0.02);
-    // vec4 torus = vec4(col1, sdTorus(samplePoint-vec3(-15.0, 0.0, 0.0),  vec2(1.2, .5)));
-    vec4 s1 = vec4(col3 , sdSphere(samplePoint-vec3(cos(iTime)-10.0, cos(iTime) + sin(iTime/3.), sin(iTime) * sin(iTime/5.) + sin(iTime/2.)), .1));
-    vec4 s3 = vec4(col3, sdSphere(samplePoint-vec3(sin(iTime)-10.5, sin(iTime) + sin(iTime/5.), sin(iTime) * sin(iTime/3.) + sin(iTime/2.)), .1));
+    float freq = sin(iTime);
+    float freq2 = sin(iTime/2.);
+    float freq3 = sin(iTime/3.);
+    float freq5 = sin(iTime/5.);
+    vec4 s1 = vec4(col3 , sdSphere(samplePoint-vec3(cos(iTime)-10.0, cos(iTime) + freq3, freq * freq5 + freq2), .1));
+    vec4 s3 = vec4(col3, sdSphere(samplePoint-vec3(sin(iTime)-10.5, freq + freq5, freq * freq3 + freq2), .1));
 
-    float s2size = .3 + sinc(sin(iTime/5.), sin(iTime/2.)) * .3;
+    float s2size = .3 + sinc(freq5, freq2) * .3;
     float s2col = step(.9, sin(290. * dot(normalize(samplePoint), normalize(vec3(sin(iTime/20.), cos(iTime/20.), 3.))))) * .5;
     vec4 s2 = vec4(vec3(s2col, s2col,max(s2col, .12)), sdSphere(samplePoint-vec3(-10.5, 0., 0.0), .1 + .3 * s2size));
     vec4 res = s1;
@@ -128,21 +116,6 @@ vec3 calcHitNormal(vec3 samplePoint) {
 					  eps.yyx*findHitInScene( samplePoint + eps.yyx ).w +
 					  eps.yxy*findHitInScene( samplePoint + eps.yxy ).w +
 					  eps.xxx*findHitInScene( samplePoint + eps.xxx ).w );
-}
-
-float calcAO( in vec3 pos, in vec3 nor )
-{
-	float occ = 0.0;
-    float sca = 1.0;
-    for( int i=0; i<5; i++ )
-    {
-        float h = 0.01 + 0.12*float(i)/4.0;
-        float d = findHitInScene( pos + h*nor ).w;
-        occ += (h-d)*sca;
-        sca *= 0.95;
-        if( occ>0.35 ) break;
-    }
-    return clamp( 1.0 - 3.0*occ, 0.0, 1.0 ) * (0.5+0.5*nor.y);
 }
 
 vec3 getLightDir() {
@@ -194,10 +167,9 @@ vec3 applyLightModifiers(vec4 traceResult, vec3 ray) {
 
     vec3 ref = reflect(ray, normal);
     float align = dot(lightDir, ref);
-    float occ = calcAO( pos, normal );
     vec4 shd = calcRef(pos, ref, 0.02, 10.);
     color = color * shd.rgb + shd.rgb *.05;
-    return (color + .4*align) - .4*occ;
+    return (color + .4*align) - .2;
 }
 vec3 render(vec3 ray) {
     vec4 traceResult = trace(ray);
@@ -228,13 +200,9 @@ void mainImage (vec2 fragCoord) {
         gl_FragColor =  vec4( color, 1.);
     } else {
         gl_FragColor = vec4( last.rgb, 1.);
-        // gl_FragColor = vec4( vPos / iResolution, 1, 1);
     }
-
 }
 
 void main() {
     mainImage(vPos);
 }
-
-

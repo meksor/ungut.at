@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Tiny5&display=swap');
+@import '@/assets/scss/variables.scss';
+@import '@/assets/scss/utils.scss';
+
+
+// Color Variables
+@each $name, $map in $colors {
+    @each $subcat, $color in $map {
+        :root {
+            --color-#{$name}-#{$subcat}: #{$color};
+        }
+        @if $subcat == 'base' {
+            :root {
+                --color-#{$name}: #{$color};
+            }
+        }
+    }
+}
+:root {
+    --elevation: 1;
+}
+
+.primary-bold {
+    font-family: "Tiny5", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: bold;
+    font-style: normal;
+    font-size: 1.5rem;
+}
+.body-bold {
+    font-family: "Tiny5", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: bold;
+    font-style: normal;
+    font-size: 1.5rem;
+}
+
+h1 {
+    font-size: 2.7rem;
+}
+
+.dark {
+    color: map-get($shades, 'white');
+}
+
+.light {
+    color: map-get($shades, 'black');
+}
+.stripes {
+    background: repeating-linear-gradient(
+        105deg,
+        map-get($shades, 'white'),
+        map-get($shades, 'white') 4rem,
+        map-get($blue, 'lighten-4') 4rem,
+        map-get($blue, 'lighten-4') 5rem
+    );
+}
+
+.shadow {
+    --shadow-size: calc(var(--elevation) * .5rem);
+    box-shadow: var(--shadow-size) var(--shadow-size) #0005;
+}
+.shadow.hoverable {
+    transition: transform .35s ease, box-shadow .35s ease;
+}
+.shadow.hoverable:hover {
+    box-shadow: calc(var(--shadow-size) * 1.2) calc(var(--shadow-size) * 1.2) #0005;
+    transform: translate(-.1rem, -.1rem) !important;
+}
+.container {
+    @extend .mx-md-up-12;
+    @extend .mx-lg-up-32;
+}
+ 
