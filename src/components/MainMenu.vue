@@ -8,7 +8,7 @@
         Info
       </nuxt-link> -->
       <nuxt-link to="/works/">
-        <h1>Works</h1>
+        <h1>???</h1>
       </nuxt-link>
     </div>
   </div>

@@ -28,4 +28,8 @@
 
 <script setup lang="ts">
 
+definePageMeta({ 
+  layout: 'works',
+}) 
+
 </script>
