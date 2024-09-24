@@ -25,7 +25,6 @@ $blue: (
   'darken-2': color.scale($blue-base, $lightness: -30%),
   'darken-3': color.scale($blue-base, $lightness: -45%)
 );
-$primary: $blue;
 
 $grey-base:rgb(94, 94, 112);
 $grey: (
@@ -56,8 +55,10 @@ $black: (
   'lighten-3': color.scale($black-base, $lightness: +45%),
   'lighten-4': color.scale($black-base, $lightness: +55%),
   'lighten-5': color.scale($black-base, $lightness: +75%),
-
 );
+
+$primary: $blue;
+
 $shades: (
   'white': $white-base,
   'transparent': transparent,
@@ -78,7 +79,7 @@ $colors : (
   'black': $black,
   'shades': $shades,
   'surface': $white,
-  'primary': $grey,
+  'primary': $primary,
 );
 
 $spacing-base: 4px;

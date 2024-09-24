@@ -1,9 +1,9 @@
 <template>
   <div class="imprint body-bold mb-4">
-    <ContentDoc path="global/imprint" />
+    <ContentDoc path="/imprint" />
   </div>
   <div class="imprint body-bold">
-    <ContentDoc path="global/legal" />
+    <ContentDoc path="/legal" />
   </div>
 </template>
 

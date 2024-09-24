@@ -28,7 +28,6 @@
     image-rendering: crisp-edges;
     image-rendering: pixelated;
     -ms-interpolation-mode: nearest-neighbor;
-
   }
 }
 </style>

@@ -10,6 +10,3 @@
     </fixed-background>
   </div>
 </template>
-
-<style lang="scss" scoped>
-</style>

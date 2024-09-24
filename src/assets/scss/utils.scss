@@ -24,7 +24,7 @@
 // Mixin to generate classes for a given property with optional coordinates
 @mixin class-by-prop($defaultProp, $propName, $useCoords) {
   // Define the maximum iteration value
-  $max-iteration: 64;
+  $max-iteration: 32;
 // Loop through the sizes from 0 to the maximum iteration
   @for $size from 0 through $max-iteration {
     // Generate a base class for the given property and size
