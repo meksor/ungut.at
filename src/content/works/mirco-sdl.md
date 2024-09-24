@@ -21,7 +21,6 @@ Defined sequences can be parameterised and reused, allowing the easy creation of
 
 A simple mirco example file:
 
-::br
 ```
 sequence seq1(A) {
     { 
@@ -53,8 +52,8 @@ C2: loop seq4()
 C3: loop seq4()
 C4: loop seq4()
 ```
-::br
 
 ... or something.
 
-**(c) Mircosoft 2020**
+
+**© Mircosoft 2020**

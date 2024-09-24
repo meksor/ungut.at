@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Tiny5&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap');
+@import '@/assets/scss/fonts/league-mono.scss';
 @import '@/assets/scss/variables.scss';
 @import '@/assets/scss/utils.scss';
 
@@ -19,18 +21,18 @@
 :root {
     --elevation: 1;
 }
-
-.primary-bold {
-    font-family: "Tiny5", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: bold;
-    font-style: normal;
-    font-size: 1.5rem;
+body {
+    font-family: "League Spartan";
+    font-size: 1.25rem;
+    pre {
+        font-family: "League Mono";
+        font-size: 1rem;
+    }
 }
-.body-bold {
+
+.font-tiny5 {
     font-family: "Tiny5", sans-serif;
     font-optical-sizing: auto;
-    font-weight: bold;
     font-style: normal;
     font-size: 1.5rem;
 }

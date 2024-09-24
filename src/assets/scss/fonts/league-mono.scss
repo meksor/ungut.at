@@ -1,0 +1,47 @@
+
+
+$variations : (
+  'ExtraBold': (
+    font-style: normal, 
+    font-weight: 800
+  ),
+  'Bold': (
+    font-style: normal, 
+    font-weight: 700
+  ),
+  'SemiBold': (
+    font-style: normal, 
+    font-weight: 600
+  ),
+  'Medium': (
+    font-style: normal, 
+    font-weight: 500
+  ),
+  'Regular': (
+    font-style: normal, 
+    font-weight: 400
+  ),
+  'Light': (
+    font-style: normal, 
+    font-weight: 300
+  ),
+  'UltraLight': (
+    font-style: normal, 
+    font-weight: 200
+  ),
+  'Thin': (
+    font-style: normal, 
+    font-weight: 100
+  ),
+);
+
+@each $var, $attrs in $variations {
+  @font-face {
+    font-family: 'League Mono';
+    font-display: swap;
+    src: url("/fonts/League/LeagueMono-Narrow#{$var}.woff2") format('woff2');
+    @each $name, $val in $attrs {
+        #{$name}: #{$val};
+    }
+  }
+}
