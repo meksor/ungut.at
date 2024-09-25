@@ -11,7 +11,7 @@ links:
     icon: mdiOpenInNew
     url: https://istkicklschonweg.at
   - title: iksw.at on Github
-    icon: mdiOpenInNew
+    icon: mdiGithub
     url: https://github.com/akvorrat/istkicklschonweg.at
   - title: epicenter.works
     icon: mdiOpenInNew
