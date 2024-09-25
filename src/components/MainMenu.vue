@@ -8,7 +8,7 @@
         Info
       </nuxt-link> -->
       <nuxt-link to="/works/">
-        <h1>???</h1>
+        <h1>WORKS</h1>
       </nuxt-link>
     </div>
   </div>
@@ -27,15 +27,5 @@
   margin: map-get($spacing, 'lg') auto;
   display: flex;
   flex-direction: row;
-
-  a {
-    margin: 0 map-get($spacing, 'xl');
-    text-decoration: none;
-    color: map-get($shades, 'white');
-  }
-
-  a:hover {
-    text-decoration: underline;
-  }
 }
 </style>

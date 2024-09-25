@@ -50,7 +50,7 @@ $white: (
 $black-base: #050505;
 $black: (
   'base': $black-base,  
-  'lighten-1': color.scale($black-base, $lightness: +15%),
+  'lighten-1': color.scale($black-base, $lightness: +10%),
   'lighten-2': color.scale($black-base, $lightness: +30%),
   'lighten-3': color.scale($black-base, $lightness: +45%),
   'lighten-4': color.scale($black-base, $lightness: +55%),
@@ -82,13 +82,49 @@ $colors : (
   'primary': $primary,
 );
 
-$spacing-base: 4px;
+$spacing-base: .25rem;
 $spacing: (
   '1': 1 * $spacing-base,
   '2': 2 * $spacing-base,
   '3': 4 * $spacing-base,
-  '4': 8 * $spacing-base,
-  '5': 16 * $spacing-base,
+  '4': 16 * $spacing-base,
+  '5': 32 * $spacing-base,
+  '6': 64 * $spacing-base,
+);
+
+$line-height-multiplier: 1;
+$font-sizes-base: .5rem;
+$font-sizes: (
+  '1': 1 * $font-sizes-base,
+  '2': 2 * $font-sizes-base,
+  '3': 3 * $font-sizes-base,
+  '4': 4 * $font-sizes-base,
+  '5': 6 * $font-sizes-base,
+  '6': 8 * $font-sizes-base,
+  '7': 12 * $font-sizes-base,
+  '8': 16 * $font-sizes-base,
+);
+
+$font-weights: (
+  'extra-bold': 800,
+  'bold': 700,
+  'semi-bold': 600,
+  'medium': 500,
+  'regular': 400,
+  'light': 300,
+  'ultra-light': 200,
+  'thin': 100,
+); 
+
+
+$elevation-base: .5;
+$elevations: (
+  '1': 1 * $elevation-base,
+  '2': 2 * $elevation-base,
+  '3': 4 * $elevation-base,
+  '4': 8 * $elevation-base,
+  '5': 16 * $elevation-base,
+  '6': 32 * $elevation-base,
 );
 
 $rounding-base: 2px;
@@ -98,6 +134,7 @@ $rounding: (
   '3': 4 * $rounding-base,
   '4': 8 * $rounding-base,
   '5': 16 * $rounding-base,
+  '6': 32 * $rounding-base,
 );
 
 $breakpoints: (

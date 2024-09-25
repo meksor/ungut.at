@@ -1,8 +1,7 @@
-Maximilian Wolschlager  
-public@ungut.at  
-Vienna, Austria  
+**Maximilian Wolschlager**  
+Programmer
 
 ::br
 
-[Github](https://github.com/meksor)
-
+public@ungut.at  
+Vienna, Austria  

@@ -1,7 +1,7 @@
 <template>
   <div>
     <fixed-background>
-      <div class="dark">    
+      <div class="light">    
         <slot />
       </div>
       <template #background>
@@ -10,3 +10,10 @@
     </fixed-background>
   </div>
 </template>
+
+<style>
+#background {
+  background-color: var(--color-surface);
+  mix-blend-mode: multiply;
+}
+</style>

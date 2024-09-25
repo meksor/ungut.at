@@ -1,40 +1,36 @@
 @import '@/assets/scss/variables.scss';
 
-@function spacing($unit) {
-  @return calc(#{$unit} * 0.5rem);
-}
 
 @mixin set-coordinates($defaultProp, $coordinate, $size) {
   @if $coordinate == 'a' {
-    #{$defaultProp}-top: spacing($size);
-    #{$defaultProp}-bottom: spacing($size);
-    #{$defaultProp}-left: spacing($size);
-    #{$defaultProp}-right: spacing($size);
+    #{$defaultProp}-top: $size;
+    #{$defaultProp}-bottom: $size;
+    #{$defaultProp}-left: $size;
+    #{$defaultProp}-right: $size;
   } @else if $coordinate == 'y' {
-    #{$defaultProp}-top: spacing($size);
-    #{$defaultProp}-bottom: spacing($size);
+    #{$defaultProp}-top: $size;
+    #{$defaultProp}-bottom: $size;
   } @else if $coordinate == 'x' {
-    #{$defaultProp}-left: spacing($size);
-    #{$defaultProp}-right: spacing($size);
+    #{$defaultProp}-left: $size;
+    #{$defaultProp}-right: $size;
   } @else {
-    #{$defaultProp}-#{$coordinate}: spacing($size);
+    #{$defaultProp}-#{$coordinate}: $size;
   }
 }
 
 // Mixin to generate classes for a given property with optional coordinates
-@mixin class-by-prop($defaultProp, $propName, $useCoords) {
+@mixin class-by-prop($defaultProp, $propName, $useCoords, $values) {
   // Define the maximum iteration value
-  $max-iteration: 32;
 // Loop through the sizes from 0 to the maximum iteration
-  @for $size from 0 through $max-iteration {
+  @each $key, $size in $values {
     // Generate a base class for the given property and size
-    .#{$propName}-#{$size} {
-      #{$defaultProp}: spacing($size);
+    .#{$propName}-#{$key} {
+      #{$defaultProp}: $size;
     }
     // If useCoords is true, generate classes with different coordinates
     @if $useCoords {
       @each $keyCoordinate, $coordinate in $coordsArray {
-        .#{$propName}#{$keyCoordinate}-#{$size} {
+        .#{$propName}#{$keyCoordinate}-#{$key} {
           @include set-coordinates($defaultProp, $coordinate, $size);
         }
       }
@@ -46,14 +42,14 @@
     @if $keyBreakpoint != 'xl' {
       @media (min-width: #{map-get($media-query, min-width)}) and (max-width: #{map-get($media-query, max-width)}) {
         // Loop through the sizes again and generate classes for the current breakpoint
-        @for $size from 0 through $max-iteration {
-          .#{$propName}-#{$keyBreakpoint}-#{$size} {
-            #{$defaultProp}: spacing($size);
+        @each $key, $size in $values {
+          .#{$propName}-#{$keyBreakpoint}-#{$key} {
+            #{$defaultProp}: $size;
           }
           // If useCoords is true, generate classes with different coordinates for the current breakpoint
           @if $useCoords {
             @each $keyCoordinate, $coordinate in $coordsArray {
-              .#{$propName}#{$keyCoordinate}-#{$keyBreakpoint}-#{$size} {
+              .#{$propName}#{$keyCoordinate}-#{$keyBreakpoint}-#{$key} {
                 @include set-coordinates($defaultProp, $coordinate, $size);
               }
             }
@@ -64,14 +60,14 @@
       // For 'xl' breakpoint (no max-width specified), generate classes without a max-width condition
       @media (min-width: #{map-get($media-query, min-width)}) {
         // Loop through the sizes again and generate classes for the 'xl' breakpoint
-        @for $size from 0 through $max-iteration {
-          .#{$propName}-#{$keyBreakpoint}-#{$size} {
-            #{$defaultProp}: spacing($size);
+        @each $key, $size in $values {
+          .#{$propName}-#{$keyBreakpoint}-#{$key} {
+            #{$defaultProp}: $size;
           }
           // If useCoords is true, generate classes with different coordinates for the 'xl' breakpoint
           @if $useCoords {
             @each $keyCoordinate, $coordinate in $coordsArray {
-              .#{$propName}#{$keyCoordinate}-#{$keyBreakpoint}-#{$size} {
+              .#{$propName}#{$keyCoordinate}-#{$keyBreakpoint}-#{$key} {
                 @include set-coordinates($defaultProp, $coordinate, $size);
               }
             }
@@ -82,14 +78,14 @@
     // Apply media queries for sm-up breakpoint and up
     @media (min-width: #{map-get($media-query, min-width)}) {
       // Loop through the sizes again and generate classes for the 'sm-up' breakpoint
-      @for $size from 0 through $max-iteration {
-        .#{$propName}-#{$keyBreakpoint}-up-#{$size} {
-          #{$defaultProp}: spacing($size);
+      @each $key, $size in $values {
+        .#{$propName}-#{$keyBreakpoint}-up-#{$key} {
+          #{$defaultProp}: $size;
         }
         // If useCoords is true, generate classes with different coordinates for the 'sm-up' breakpoint
         @if $useCoords {
           @each $keyCoordinate, $coordinate in $coordsArray {
-            .#{$propName}#{$keyCoordinate}-#{$keyBreakpoint}-up-#{$size} {
+            .#{$propName}#{$keyCoordinate}-#{$keyBreakpoint}-up-#{$key} {
               @include set-coordinates($defaultProp, $coordinate, $size);
             }
           }
@@ -100,17 +96,20 @@
 }
 
 // Generate margin classes with comments
-@include class-by-prop('margin', 'm', true);
+@include class-by-prop('margin', 'm', true, $spacing);
 // Generate padding classes with comments
-@include class-by-prop('padding', 'p', true);
+@include class-by-prop('padding', 'p', true, $spacing);
 
 // Generate padding classes with comments
-@include class-by-prop('padding', 'p', true);
+@include class-by-prop('padding', 'p', true, $spacing);
+@include class-by-prop('--elevation', 'el', false, $elevations);
+@include class-by-prop('font-size', 'fs', false, $font-sizes);
 
-// Generate font-size classes with comments
-@include class-by-prop('font-size', 'fs', false);
-
-@include class-by-prop('--elevation', 'el', false);
+@each $name, $value in $font-weights {
+  .fw-#{$name} {
+    font-weight: $value;
+  }
+}
 
 // Width / Height helpers
 $one-hundred: 100;
@@ -163,4 +162,31 @@ $one-hundred: 100;
       }
     }
   }
+}
+
+// Color Variables
+@each $name, $map in $colors {
+  @each $subcat, $color in $map {
+    :root {
+      --color-#{$name}-#{$subcat}: #{$color};
+    }
+
+    @if $subcat =='base' {
+      :root {
+        --color-#{$name}: #{$color};
+      }
+    }
+  }
+}
+
+
+// Text Align
+.ta-center {
+  text-align: center;
+}
+.ta-start {
+  text-align: start;
+}
+.ta-end {
+  text-align: end;
 }

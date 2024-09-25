@@ -1,5 +1,5 @@
 <template>
-  <div class="card__text pa-2">
+  <div class="card__text pa-3">
     <slot></slot>
   </div>
 </template>
@@ -13,5 +13,9 @@
   
   
 <style lang="scss">  
-.card__text {}
+.card__text {
+  img {
+    max-width: 100%;
+  } 
+}
 </style>

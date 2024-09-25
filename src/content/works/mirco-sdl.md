@@ -7,10 +7,11 @@ image: /img/works/mirco-sdl/main.png
 headerImage: /img/works/mirco-sdl/header.png
 
 links: 
-    github: https://github.com/MadConductor/mirco
+  - title: Mirco on Github
+    icon: mdiGithub
+    url: https://github.com/MadConductor/mirco
 
 categories:
-  - Programming
   - Music
 ---
 
@@ -21,7 +22,7 @@ Defined sequences can be parameterised and reused, allowing the easy creation of
 
 A simple mirco example file:
 
-```
+```js
 sequence seq1(A) {
     { 
     G0:2,
@@ -53,7 +54,13 @@ C3: loop seq4()
 C4: loop seq4()
 ```
 
-... or something.
+Now hook up your MIDI equipment and run mirco in your shell!
+
+```bash
+$ ./mirco example.mirco --bpm 90 --api alsa --input 1 --output 2
+```
+
+
 
 
 **© Mircosoft 2020**

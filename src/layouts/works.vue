@@ -1,33 +1,34 @@
 <template>
   <div>
     <fixed-background>
-      <div class="light h-100">    
+      <div class="light">    
         <slot />
       </div>
       <template #background>
-        <div>
-          <nuxt-img fit="cover" src="/img/stars-inverted.png"></nuxt-img>
-        </div>
+        <shader path="assets/shaders/works.glsl"></shader>
       </template>
     </fixed-background>
   </div>
 </template>
 
-<script setup lang="ts">
-</script>
-
-<style lang="scss" scoped>
-#background{
-  img {
-    transform: scale(1.5);
-    min-height: 100%;
-    image-rendering: optimizeSpeed;
-    image-rendering: -moz-crisp-edges;
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: -o-crisp-edges;
-    image-rendering: crisp-edges;
-    image-rendering: pixelated;
-    -ms-interpolation-mode: nearest-neighbor;
-  }
+<style>
+#background {
+  background-color: var(--color-surface);
+  mix-blend-mode: multiply;
 }
 </style>
+
+<!--style lang="scss" scoped>
+.works-layout {
+  --square-color: var(--color-black);
+  min-height: 100dvh;
+  background-color: var(--color-surface);
+  background-image: linear-gradient(90deg, var(--square-color) 2px, transparent 0),
+                    linear-gradient(var(--square-color) 2px, transparent 0),
+                    linear-gradient(90deg, var(--square-color) 1px, transparent 0),
+                    linear-gradient(var(--square-color) 1px, transparent 0);
+
+  background-size: 240px 240px, 240px 240px, 24px 24px, 24px 24px, 24px 24px;
+  background-position: 15px 25px;
+}
+</style-->

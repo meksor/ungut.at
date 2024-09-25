@@ -63,9 +63,7 @@ float sinc( float x, float k )
 
 vec4 findHitInScene(vec3 samplePoint) {
     samplePoint = vec3(samplePoint.x, samplePoint.y - iScroll.y, samplePoint.z);
-    vec3 col1 = vec3(.2);
-    vec3 col2 = vec3(.8, .8, .9);
-    vec3 col3 = vec3(0.95, 0.01, 0.02);
+    vec3 col3 = vec3(.5, .7, .9);
     float freq = sin(iTime);
     float freq2 = sin(iTime/2.);
     float freq3 = sin(iTime/3.);
@@ -74,20 +72,13 @@ vec4 findHitInScene(vec3 samplePoint) {
     vec4 s3 = vec4(col3, sdSphere(samplePoint-vec3(sin(iTime)-10.5, freq + freq5, freq * freq3 + freq2), .1));
 
     float s2size = .3 + sinc(freq5, freq2) * .3;
-    float s2col = step(.9, sin(290. * dot(normalize(samplePoint), normalize(vec3(sin(iTime/20.), cos(iTime/20.), 3.))))) * .5;
-    vec4 s2 = vec4(vec3(s2col, s2col,max(s2col, .12)), sdSphere(samplePoint-vec3(-10.5, 0., 0.0), .1 + .3 * s2size));
-    vec4 res = s1;
-    res = opSmoothUnion(res, s2, .9);
+    // float s2col = step(.9, sin(290. * dot(normalize(samplePoint), normalize(vec3(sin(iTime/20.), cos(iTime/20.), 3.))))) * .5;
+    // vec4 s2 = vec4(vec3(s2col, s2col,max(s2col, .12)), sdSphere(samplePoint-vec3(-10.5, 0., 0.0), .1 + .3 * s2size));
+    vec4 s2 = vec4(vec3(.75), sdSphere(samplePoint-vec3(-10.5, 0., 0.0), .1 + .3 * s2size));
+    vec4 res = s2;
+    res = opSmoothUnion(res, s1, .9);
     res = opSmoothUnion(res, s3, .5);
-    res = opSmoothUnion(res, s2, .5);
     return res;
-}
-
-vec3 background(vec3 ray) {
-    mat3 rot = camera(vec3(1., 1., 1.), sin(iTime/314000.));
-    float pos = dot(rot * ray, vec3(1.2, 0., 0.35));
-    float r = step(.999, sin(10000. * pos - cos(15000. *pos)));
-    return vec3(.05, .05, 0.05) * r;
 }
 
 vec4 trace(vec3 ray) {
@@ -95,18 +86,18 @@ vec4 trace(vec3 ray) {
     float far = 20.0;
 
     float distance = near;
-    vec3 materialColor = vec3(.2,.2,.2);
+    vec3 materialColor = vec3(1.);
 
     for (int i=0; i<64; i++) {
-	    float error = 0.0004*distance;
+	    float error = 0.0006*distance;
 
 	    vec4 hit = findHitInScene(ray * distance);
         if (hit.w<error || hit.w>far) break;
         distance += hit.w;
         materialColor = hit.rgb;
     }
+    if (distance>far) {materialColor = vec3(1.);}
 
-    if (distance>far) {materialColor = background(ray);}
     return vec4(materialColor, distance);
 }
 
@@ -120,8 +111,8 @@ vec3 calcHitNormal(vec3 samplePoint) {
 
 vec3 getLightDir() {
         
-    float x = tan(iMouse.y * 3.14);
-    float y = sin(iMouse.x * 3.14);
+    float x = tan(-iMouse.y * 3.14);
+    float y = sin(-iMouse.x * 3.14);
     return normalize(vec3(-1., x, y));
 }
 
@@ -132,7 +123,7 @@ vec4 calcRef( in vec3 ro, in vec3 rd, in float mint, in float tmax )
 
     float res = 1.0;
     float t = mint;
-    for( int i=0; i<24; i++ )
+    for( int i=0; i<32; i++ )
     {
 		vec4 h = findHitInScene( ro + rd*t);
         float s = clamp(8.0*h.w/t,0.0,1.0);
@@ -155,6 +146,11 @@ vec4 calcRef( in vec3 ro, in vec3 rd, in float mint, in float tmax )
     return vec4(vec3(1.), 100.);
 }
 
+float fresnel_schlick_ratio(float cos_theta_incident, float power) {
+	float p = 1. - cos_theta_incident;
+	return pow(p, power);
+}
+
 vec3 applyLightModifiers(vec4 traceResult, vec3 ray) {
     vec3 color = traceResult.rgb;
     float dist = traceResult.a;
@@ -169,7 +165,7 @@ vec3 applyLightModifiers(vec4 traceResult, vec3 ray) {
     float align = dot(lightDir, ref);
     vec4 shd = calcRef(pos, ref, 0.02, 10.);
     color = color * shd.rgb + shd.rgb *.05;
-    return (color + .4*align) - .2;
+    return (color + .5*align) - .2;
 }
 vec3 render(vec3 ray) {
     vec4 traceResult = trace(ray);

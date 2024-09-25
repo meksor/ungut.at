@@ -12,7 +12,6 @@
 @import '@/assets/scss/variables.scss';
 
 .imprint {
-    color: map-get($shades, 'white') !important;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

@@ -12,6 +12,7 @@
     "@nuxthq/studio": "^2.0.3",
     "@types/node": "^18.19.44",
     "nuxt": "^3.12.4",
+    "nuxt-mdi": "^2.1.1",
     "sass-embedded": "^1.77.8"
   },
   "dependencies": {

@@ -1,76 +1,94 @@
-@import url('https://fonts.googleapis.com/css2?family=Tiny5&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap');
 @import '@/assets/scss/fonts/league-mono.scss';
 @import '@/assets/scss/variables.scss';
 @import '@/assets/scss/utils.scss';
 
 
-// Color Variables
-@each $name, $map in $colors {
-    @each $subcat, $color in $map {
-        :root {
-            --color-#{$name}-#{$subcat}: #{$color};
-        }
-        @if $subcat == 'base' {
-            :root {
-                --color-#{$name}: #{$color};
-            }
-        }
-    }
-}
+
 :root {
-    --elevation: 1;
-}
-body {
-    font-family: "League Spartan";
-    font-size: 1.25rem;
-    pre {
-        font-family: "League Mono";
-        font-size: 1rem;
-    }
+  --elevation: .5;
+  --shiki-default-bg: map-get($white, 'darken-1');
+
 }
 
-.font-tiny5 {
-    font-family: "Tiny5", sans-serif;
-    font-optical-sizing: auto;
-    font-style: normal;
-    font-size: 1.5rem;
+body {
+  font-family: "League Spartan";
+  font-size: 1.25rem;
+
+  p {
+    line-height: 120%;
+    a {
+      text-decoration: underline;
+    }
+  }
+
+  pre {
+    font-family: "League Mono";
+    font-size: 1rem;
+
+   
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+}
+
+.text-mono {
+  font-family: 'League Mono';
+}
+
+.of-visible {
+  overflow: visible;
 }
 
 h1 {
-    font-size: 2.7rem;
+  font-size: 2.7rem;
+}
+
+pre {
+  background-color: map-get($black, 'lighten-1');
+  padding: 1rem;
+  border-radius: .25rem;
 }
 
 .dark {
-    color: map-get($shades, 'white');
+  color: map-get($shades, 'white');
 }
 
 .light {
-    color: map-get($shades, 'black');
+  color: map-get($shades, 'black');
 }
+
 .stripes {
-    background: repeating-linear-gradient(
-        105deg,
-        map-get($shades, 'white'),
-        map-get($shades, 'white') 4rem,
-        map-get($blue, 'lighten-4') 4rem,
-        map-get($blue, 'lighten-4') 5rem
-    );
+  background: repeating-linear-gradient(105deg,
+      map-get($shades, 'white'),
+      map-get($shades, 'white') 4rem,
+      map-get($blue, 'lighten-4') 4rem,
+      map-get($blue, 'lighten-4') 5rem);
 }
 
 .shadow {
-    --shadow-size: calc(var(--elevation) * .5rem);
-    box-shadow: var(--shadow-size) var(--shadow-size) #0005;
+  --shadow-size: calc(var(--elevation) * .5rem);
+  box-shadow: var(--shadow-size) var(--shadow-size) #0005;
 }
+
 .shadow.hoverable {
-    transition: transform .35s ease, box-shadow .35s ease;
+  transition: transform .25s ease, box-shadow .25s ease;
 }
+
 .shadow.hoverable:hover {
-    box-shadow: calc(var(--shadow-size) * 1.2) calc(var(--shadow-size) * 1.2) #0005;
-    transform: translate(-.1rem, -.1rem) !important;
+  box-shadow: calc(var(--shadow-size) * 1.2) calc(var(--shadow-size) * 1.2) #0005;
+  transform: translate(-.1rem, -.1rem) !important;
 }
+
 .container {
-    @extend .mx-md-up-12;
-    @extend .mx-lg-up-32;
+  @extend .mx-2;
+  @extend .mx-md-up-5;
+  @extend .mx-xl-up-6;
 }
- 

@@ -8,7 +8,7 @@ export default defineNuxtConfig({
     },
     layoutTransition: { name: 'layout', mode: 'in-out' }
   },
-  modules: ['@nuxt/content', "@nuxt/image", '@nuxthq/studio'],
+  modules: ['@nuxt/content', "@nuxt/image", '@nuxthq/studio', 'nuxt-mdi'],
   srcDir: 'src/',
   ssr: true,
   routeRules: {
@@ -20,10 +20,27 @@ export default defineNuxtConfig({
     sources: {
       global: {
         driver: 'fs',
-        prefix: '', 
+        prefix: '',
         base: resolve(__dirname, 'content')
       },
-      
+    },
+    highlight: {
+      theme: 'houston',
+      langs: [
+        'json', 
+        'js', 
+        'ts', 
+        'html', 
+        'css', 
+        'vue', 
+        'shell', 
+        'mdc', 
+        'md', 
+        'yaml',
+        'c',
+        'cpp',
+        'java'
+      ]
     }
   },
   vite: {
