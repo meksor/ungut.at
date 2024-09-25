@@ -7,8 +7,8 @@ image: /img/works/butterchurn/main.jpg
 headerImage: /img/works/butterchurn/header.jpg
 
 categories:
-  - Software
-  - Website
+  - Art
+  - Installation
 ---
 
 ## Huh?
