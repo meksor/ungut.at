@@ -1,5 +1,5 @@
 **Maximilian Wolschlager**  
-Programmer
+Programmer, Artist
 
 ::br
 
