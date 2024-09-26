@@ -1,31 +1,36 @@
 <template>
   <div>
     <div class="container pa-2 mt-3">
-      <btn :to="lastPath">
+      <btn :to="backPath">
         <mdi-icon icon="mdiArrowLeft" class="mr-2"/>
         Back
       </btn>
     </div>
-    <ContentDoc v-slot="{ doc }" >
-      <article class="container">
-        <card class="ma-2 el-2">
-          <card-text>
-            <doc-header :doc="doc"></doc-header>
-          </card-text>
-          <nuxt-img fit="cover" :src="doc.headerImage" class="header__image w-100 h-100"></nuxt-img>
-          <card-text>
-            <ContentRenderer class="body-text" :value="doc" />
-          </card-text>
-        </card>
-      </article>
-    </ContentDoc>
+    <article class="container">
+      <card class="ma-2 el-2">
+        <card-text>
+          <doc-header :doc="doc"></doc-header>
+        </card-text>
+        <nuxt-img fit="cover" :src="doc.headerImage" class="header__image w-100 h-100"></nuxt-img>
+        <card-text>
+          <ContentRenderer class="body-text" :value="doc">
+            <template #empty>
+              Nothing here...
+            </template>
+
+          </ContentRenderer>
+        </card-text>
+      </card>
+    </article>
   </div>  
 </template>
 
 
 <script setup lang="ts">
+const route = useRoute();
 const router = useRouter();
-const lastPath = computed(() => router.options.history.state.back as string ?? "/works");
+const backPath = computed(() => router.options.history.state.back as string ?? "/works");
+const { data: doc } = await useAsyncData(`content:${route.path}`, () => queryContent(route.path).findOne())
 
 definePageMeta({ 
   layout: 'works',

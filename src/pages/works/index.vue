@@ -8,33 +8,34 @@
       </ContentDoc>
     </row>
     <row class="my-4">
-      <div v-for="p in works" class="w-100 w-half-sm-up w-third-md-up w-fifth-lg-up">
-        <nuxt-link :to="p._path">
-          <card
-            :key="p._path" 
-            aspect-ratio="1 / 1"
-            class="ma-2 hoverable">
-            <column justify-content="space-between" class="h-100">
-              <card class="pa-1 ma-1 el-0">
-                <h2>{{ p.title }}</h2>
-              </card>
-              <card class="pa-1 ma-1 el-0">
-                <div>{{ p.subtitle }}</div>
-              </card>
-            </column>
-            <template #background>
-              <nuxt-img class="w-100" :src="p.image"></nuxt-img>
-            </template>
-          </card>
-        </nuxt-link>
-      </div>
-
+      <ContentQuery path="/works/" :sort="sortBy" v-slot="{data: works}">
+        <div v-for="p in works" class="w-100 w-half-sm-up w-third-md-up w-fifth-lg-up">
+          <nuxt-link :to="p._path">
+            <card
+              :key="p._path + '/'" 
+              aspect-ratio="1 / 1"
+              class="ma-2 hoverable">
+              <column justify-content="space-between" class="h-100">
+                <card class="pa-1 ma-1 el-0">
+                  <h2>{{ p.title }}</h2>
+                </card>
+                <card class="pa-1 ma-1 el-0">
+                  <div>{{ p.subtitle }}</div>
+                </card>
+              </column>
+              <template #background>
+                <nuxt-img class="w-100" :src="p.image"></nuxt-img>
+              </template>
+            </card>
+          </nuxt-link>
+        </div>
+      </ContentQuery>
     </row>
   </div>
 </template>
 
 <script setup lang="ts">
-const { data: works } = await useAsyncData("works", () => queryContent("/works/").sort({ date: -1 }).find())
+const sortBy = ref({ date: -1 })
 
 definePageMeta({ 
   layout: 'works',

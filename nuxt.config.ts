@@ -13,6 +13,7 @@ export default defineNuxtConfig({
   ssr: true,
   routeRules: {
     '/**': { prerender: true, ssr: true },
+    // "/api/**": { isr: false },
   },
   css: ["@/assets/scss/main.scss", "@/assets/scss/utils.scss"],
   content: {
@@ -41,6 +42,11 @@ export default defineNuxtConfig({
         'cpp',
         'java'
       ]
+    }
+  },
+  nitro: {
+    prerender: {
+      routes: ['/', '/works/']
     }
   },
   vite: {
