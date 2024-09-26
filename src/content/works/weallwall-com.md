@@ -11,10 +11,11 @@ links:
     icon: mdiSkull
     url: https://weallwall.com
   - title: Christian Schratt
-    icon: mdiGithub
+    icon: mdiOpenInNew
     url: https://www.christian-schratt.at
 
 categories:
+  - Software
   - Website
 ---
 

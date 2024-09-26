@@ -44,6 +44,9 @@ definePageMeta({
   border-top: 2px outset var(--color-black);
   border-bottom: 2px outset var(--color-black);
 }
+.body-text {
+  overflow: visible;
+}
 .body-text > * {
   overflow: visible;
   margin-bottom: 1rem !important;

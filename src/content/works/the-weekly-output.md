@@ -10,6 +10,9 @@ links:
   - title: TWO on Github
     icon: mdiGithub
     url: https://github.com/TheWeeklyOutput/
+  - title: Website (Dead)
+    icon: mdiSkull
+    url: https://weekly-output.com/
 
 categories:
   - Website

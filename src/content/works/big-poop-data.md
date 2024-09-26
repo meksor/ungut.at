@@ -34,7 +34,9 @@ Nico exclaimed angrily.
 
 So he did what any sane hacker would do: He installed a button in the toilet door. It's purpose: to be hooked up to a small computer to enable remote monitoring of the toilet door state.
 
+::row{justify-content=center}
 ![Button](/img/works/bpd/button.jpg)
+::
 
 But of course that was the premature end of the project as it sank to the bottom of the (very familiar) ocean of procrastination.
 
@@ -58,21 +60,25 @@ We assigned different parts of the projects to each other. Robert was going to d
 
 The Raspberry Pi we would install would dispatch REST-API calls to bigpoopdata.com and there the backend would store it in an sqlite database, later it would do simple statistical analyses (all in javascript because I'm an idiot) to send them to the frontend on demand.
 
+::row{justify-content=center}
 ![Raspberry Pi](/img/works/bpd/pi.jpg)
+::
 
 Two months later we had the website up and running, just in time for the application deadline for Ars Electronica. (Although we did make a few adjustments afterwards.)
 
 ![Website](/img/works/bpd/website.png)
 
-
-
 ## Ars Electronica Festival
 
 A few weeks went by and we got the word that the jury had taken a liking to our project and wanted to give us the Netidee Spezial Prize. Still laughing about the sweet absurdity of the whole thing we set out to build a physical component for the website which we could exhibit at the Ars Electronica Festival.
 
+::row{justify-content=center}
 ![Building The Tank](/img/works/bpd/building_tank.jpg)
+::
 
 The device consisted of a touchscreen with a computer inside of a toilet tank. The festival visitors could flush the toilet tank to open or close the virtual toilet door.
 A few last-minute fixes were required on-site.
 
+::row{justify-content=center}
 ![Last Minute Fixes](/img/works/bpd/nico_fixing.jpg)
+::

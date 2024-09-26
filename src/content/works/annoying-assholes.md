@@ -29,31 +29,39 @@ I knew I had to make it more affordable, so I consulted with a few of my electro
 
 It was like Christmas!
 
-![Goodies](/img/works/annoying-assholes/goodies.jpg)
-
+::row{justify-content=center}
+![Goodies](/img/works/annoying-assholes/goodies.jpg){width=750px}
+::
 
 The first PCB was designed by [Amir](https://github.com/kallaballa) in a CAD program and home-made at our local hackerspace [Metalab](http://metalab.at/).
 
 We used spraypaint for the mask, which we removed with a LASER-Cutter where we wanted the copper to dissolve.
 
+::row{justify-content=center}
 ![LAZZZORED](/img/works/annoying-assholes/etching_lazzzored.jpg)
-
+::
 
 Metalab's heater for the acid bath was pretty broken, so we tried to build a new one:
 
+::row{justify-content=center}
 ![Failed Heater](/img/works/annoying-assholes/etching_new_heater.jpg)
+::
 
 But that didn't work either so I just sat there with a hot-air-gun to keep it from getting too chilly.
 
 Needless to say, we noticed a mistake in the design right after it was done etching. Thankfully this was easily fixable:
 
+::row{justify-content=center}
 ![Failed Heater](/img/works/annoying-assholes/etching_fixed_prototype.jpg)
+::
 
 We still wanted a proper PCB so we did it all again with a fixed design.
 
 This was the finished prototype:
 
+::row{justify-content=center}
 ::youtube-video{video-id="84bH-g-eUzU"}
+::
 ::
 
 ## Final Version
@@ -64,7 +72,9 @@ For the next step we had those made and bought all the other parts. Being multip
 
 The final version was programmed to go into deep-sleep for 15-30 minutes, wake back up, beep randomly and go back to sleep.
 
+::row{justify-content=center}
 ![Done!](/img/works/annoying-assholes/done.jpg)
+::
 
 
 Done! We ordered about a hundred of these and I stored a few to give to the people that helped along the way.

@@ -19,7 +19,7 @@
                 <card class="pa-1 ma-1 el-0">
                   <h2>{{ p.title }}</h2>
                 </card>
-                <card class="pa-1 ma-1 el-0">
+                <card v-if="p.subtitle" class="pa-1 ma-1 el-0">
                   <div>{{ p.subtitle }}</div>
                 </card>
               </column>
