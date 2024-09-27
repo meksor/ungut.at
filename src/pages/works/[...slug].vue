@@ -48,7 +48,6 @@ definePageMeta({
   overflow: visible;
 }
 .body-text > * {
-  overflow: visible;
   margin-bottom: 1rem !important;
 }
 .body-text > h2 > a {

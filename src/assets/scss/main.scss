@@ -33,10 +33,13 @@ body {
   }
 
   pre {
+    padding: 1rem;
     font-family: "League Mono";
     font-size: 1rem;
-
-   
+    overflow: scroll;
+    code {
+      overflow: scroll;
+    }
   }
 
   a {
@@ -65,11 +68,15 @@ h1 {
   font-size: 2.7rem;
 }
 
-pre {
+pre, code {
   background-color: map-get($black, 'lighten-1');
-  padding: 1rem;
-  border-radius: .25rem;
   color: map-get($shades, 'white');
+}
+pre {
+  border-radius: .25rem;
+}
+code {
+  border-radius: .125rem;
 }
 
 .dark {

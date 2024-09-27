@@ -24,6 +24,7 @@ const props = withDefaults(defineProps<Props>(), {
 <style lang="scss">
 
 .youtube-video iframe {
+  max-width: 100%;
   width: 500px;
   height: 320px;
   margin-left: auto;
