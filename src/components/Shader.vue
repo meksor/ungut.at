@@ -13,10 +13,12 @@ interface Props {
   path: string
   textures?: Texture[]
   backBuffer?: boolean
+  oneShot?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
   backBuffer: false,
+  oneShot: false,
 })
 
 const shaderCanvas = ref()
@@ -92,7 +94,11 @@ onMounted(async () => {
       // resize the attachments
       twgl.resizeFramebufferInfo(gl, fb1);
       twgl.resizeFramebufferInfo(gl, fb2);
-    }    
+    } else if (props.oneShot) {
+      // skip this frame if the canvas wasnt resized
+      // and we are in oneshot mode
+      return window.requestAnimationFrame(draw)
+    }
     gl.viewport(0, 0, gl.canvas.width, gl.canvas.height)
     let minSide = Math.min(gl.canvas.width, gl.canvas.height)
     const uniforms = {
@@ -120,7 +126,7 @@ onMounted(async () => {
     fb2 = tfb;
 
     if (shaderCanvas.value) {
-      window.requestAnimationFrame(draw)
+      return window.requestAnimationFrame(draw)
     }
   }
   window.requestAnimationFrame(draw)

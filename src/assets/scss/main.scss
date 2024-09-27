@@ -8,7 +8,19 @@
 :root {
   --elevation: .5;
   --shiki-default-bg: map-get($white, 'darken-1');
+}
 
+ul, ol {
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+  margin-left: 1.5rem;
+  line-height: 120%;
+}
+ul {
+  list-style: inside square;
+}
+ol {
+  list-style: inside dot;
 }
 
 body {
@@ -55,6 +67,7 @@ pre {
   background-color: map-get($black, 'lighten-1');
   padding: 1rem;
   border-radius: .25rem;
+  color: map-get($shades, 'white');
 }
 
 .dark {
@@ -90,5 +103,6 @@ pre {
 .container {
   @extend .mx-2;
   @extend .mx-md-up-5;
-  @extend .mx-xl-up-6;
+  @extend .mx-lg-up-6;
+  @extend .mx-xl-up-7;
 }

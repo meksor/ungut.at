@@ -90,10 +90,12 @@ $spacing: (
   '4': 16 * $spacing-base,
   '5': 32 * $spacing-base,
   '6': 64 * $spacing-base,
+  '7': 96 * $spacing-base,
+  '8': 128 * $spacing-base,
 );
 
 $line-height-multiplier: 1;
-$font-sizes-base: .5rem;
+$font-sizes-base: .25rem;
 $font-sizes: (
   '1': 1 * $font-sizes-base,
   '2': 2 * $font-sizes-base,
@@ -103,6 +105,8 @@ $font-sizes: (
   '6': 8 * $font-sizes-base,
   '7': 12 * $font-sizes-base,
   '8': 16 * $font-sizes-base,
+  '9': 24 * $font-sizes-base,
+  '10': 32 * $font-sizes-base,
 );
 
 $font-weights: (
@@ -119,6 +123,7 @@ $font-weights: (
 
 $elevation-base: .5;
 $elevations: (
+  '0': 0,
   '1': 1 * $elevation-base,
   '2': 2 * $elevation-base,
   '3': 4 * $elevation-base,

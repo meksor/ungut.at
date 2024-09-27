@@ -102,7 +102,6 @@
 
 // Generate padding classes with comments
 @include class-by-prop('padding', 'p', true, $spacing);
-@include class-by-prop('--elevation', 'el', false, $elevations);
 @include class-by-prop('font-size', 'fs', false, $font-sizes);
 
 @each $name, $value in $font-weights {
@@ -120,6 +119,12 @@ $one-hundred: 100;
   }
   .w-#{$percent} {
     width: $percent * 1%;
+  }
+  .mh-#{$percent} {
+    max-height: $percent * 1%;
+  }
+  .mw-#{$percent} {
+    max-width: $percent * 1%;
   }
 }
 
@@ -179,6 +184,31 @@ $one-hundred: 100;
   }
 }
 
+// Elevation Helpers
+@each $name, $val in $elevations {
+    .el-#{$name} {
+      --elevation: #{$val};
+    }
+}
+
+
+
+// Border Width
+$max-bw: 10;
+
+@for $bw from -1 through $max-bw {
+  .bw-#{$bw} {
+    border-width: $bw * .5px !important;
+  }
+  
+}
+@each $keyCoordinate, $coordinate in $coordsArray {
+  .b#{$keyCoordinate} {
+    border-style: unset;
+
+    @include set-coordinates("border", $coordinate, solid);
+  }
+}
 
 // Text Align
 .ta-center {

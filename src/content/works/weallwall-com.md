@@ -7,7 +7,7 @@ image: /img/works/weallwall.com/main.png
 headerImage: /img/works/weallwall.com/header.png
 
 links: 
-  - title: Website Link (Dead)
+  - title: Website (Dead)
     icon: mdiSkull
     url: https://weallwall.com
   - title: Christian Schratt

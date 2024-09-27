@@ -16,4 +16,8 @@ So did qbe and me.
 This gadget turns midi clock messages into clicktrack pulses with a clock divider in between which enables triplets and more.
 Technically, you could play this thing like a mini-rythm controlling keyboard by putting this between your sequencer and midi clock.
 
-![Connected to a Pocket Operator](/img/works/clicktrack-interface/pocket_op.jpg)
+::row{justify-content=center}
+
+![Connected to a Pocket Operator](/img/works/clicktrack-interface/pocket_op.jpg){width=500px}
+
+::

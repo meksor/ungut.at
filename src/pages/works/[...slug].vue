@@ -1,17 +1,16 @@
 <template>
   <div>
     <div class="container pa-2 mt-3">
-      <btn :to="backPath">
-        <mdi-icon icon="mdiArrowLeft" class="mr-2"/>
+      <btn :to="backPath" icon="mdiArrowLeft">
         Back
       </btn>
     </div>
     <article class="container">
-      <card class="ma-2 el-2">
-        <card-text>
+      <card v-if="doc" class="ma-2 el-2">
+        <card-text >
           <doc-header :doc="doc"></doc-header>
         </card-text>
-        <nuxt-img fit="cover" :src="doc.headerImage" class="header__image w-100 h-100"></nuxt-img>
+        <nuxt-img class="header__image" fit="cover" :src="doc.headerImage" width="100%"></nuxt-img>
         <card-text>
           <ContentRenderer class="body-text" :value="doc">
             <template #empty>
@@ -40,9 +39,10 @@ definePageMeta({
 
 <style lang="scss">
 .header__image {
-  max-height: 450px;
+  overflow: hidden;
   border-top: 2px outset var(--color-black);
   border-bottom: 2px outset var(--color-black);
+  width: 100%;
 }
 .body-text {
   overflow: visible;
@@ -55,5 +55,4 @@ definePageMeta({
   text-decoration: none;
   color: var(--color-black);
 }
-
 </style>

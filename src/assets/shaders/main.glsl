@@ -136,7 +136,7 @@ vec4 calcRef( in vec3 ro, in vec3 rd, in float mint, in float tmax )
 
             vec3 ref = reflect(rd, normal);
             float align = dot(lightDir, ref);
-            return h + .2 * align;
+            return h + .2 * abs(align);
         };
         if (t>tmax) {
             break;

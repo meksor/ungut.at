@@ -1,5 +1,5 @@
 <template>
-  <div class="card shadow" :style="styles">
+  <div class="card shadow ba bw-4" :style="styles">
     <slot></slot>
     <div class="card__background" :style="bgStyles">
       <slot name="background"></slot>
@@ -8,10 +8,13 @@
 </template>
 
 <script setup lang="ts">
+const img = useImage()
+
 interface Props {
   color?: string
   borderColor?: string
   aspectRatio?: string
+  bgImage?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -29,18 +32,22 @@ const styles = computed(() =>
 })
 const bgStyles = computed(() =>
 {
-  return {
+  const styles: any = {
     backgroundColor: `var(--color-${props.color})`,
   }
+  if (props.bgImage){
+    const imgUrl = img(props.bgImage);
+    styles.backgroundImage = `url('${imgUrl}')`;
+  }
+  return styles;
 })
+
 
 </script>
 
 
 <style lang="scss">
 .card {
-  border-width: 1px;
-  border-style: solid;
   position: relative;
   display: block;
   z-index: 0;
@@ -53,5 +60,7 @@ const bgStyles = computed(() =>
   width: 100%;
   height: 100%;
   z-index: -1;
+  background-size: cover;
+  background-position: center center;
 }
 </style>

@@ -5,7 +5,7 @@
         <slot />
       </div>
       <template #background>
-        <shader path="assets/shaders/works.glsl"></shader>
+        <shader one-shot path="assets/shaders/sticky.glsl"></shader>
       </template>
     </fixed-background>
   </div>

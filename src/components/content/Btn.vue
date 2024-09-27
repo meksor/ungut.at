@@ -1,18 +1,25 @@
 <template>
-  <nuxt-link class="button shadow hoverable fw-semi-bold fs-2 pa-2" :style="styles" :to="props.to">
-    <row align-items="center">
-      <slot>
-        {{ text }}
-      </slot>
+  <nuxt-link class="button shadow hoverable fw-semi-bold fs-4 pa-2" :style="styles" :to="props.to">
+    <row align-items="center" class="button__content">
+      <mdi-icon  v-if="props.icon" :icon="props.icon"  class="mr-2"/>
+      <span class="button__text">
+        <slot>
+          {{ text }}
+        </slot>
+      </span>
     </row>
   </nuxt-link>
 </template>
 
 <script setup lang="ts">
 import type { RouterLinkProps } from 'vue-router'
+import * as Icons from '@mdi/js'
+
+type MdiIconString = keyof typeof Icons
 
 interface Props extends RouterLinkProps {
   text?: string
+  icon?: MdiIconString
   color?: string
   borderColor?: string
   aspectRatio?: string
@@ -44,6 +51,9 @@ const styles = computed(() =>
   text-decoration: none;
   cursor: pointer;
   color: inherit;
-  line-height: 100% !important;
+}
+.button__text { 
+  overflow: visible;
+  margin-bottom: -1%;
 }
 </style>

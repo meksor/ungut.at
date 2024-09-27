@@ -11,8 +11,7 @@
     </row>
     <divider v-if="doc.links" class="mb-2"/>
     <row v-if="doc.links" justify-content="start">
-      <btn v-for="link in doc.links" :to="link.url" target="_blank" class="mr-2 my-2">
-        <mdi-icon v-if="link.icon" :icon="link.icon" class="mr-2"/>
+      <btn v-for="link in doc.links" :to="link.url" :icon="link.icon" target="_blank" class="mr-2 my-2">
         {{ link.title }}
       </btn>
     </row>

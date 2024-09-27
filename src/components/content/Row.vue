@@ -31,5 +31,6 @@ const styles = computed(() =>
   flex-direction: row;
   flex-wrap: wrap;
   overflow: visible;
+  
 }
 </style>

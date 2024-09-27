@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <row class="mt-4" justify-content="center">
-      <h1 class="fs-6 fs-sm-up-7 fs-md-up-8">WORKS</h1>
+      <h1 class="fs-7 fs-sm-up-9 fs-md-up-10">WORKS</h1>
       <ContentDoc>
         <template #empty>
         </template>
@@ -14,18 +14,16 @@
             <card
               :key="p._path + '/'" 
               aspect-ratio="1 / 1"
-              class="ma-2 hoverable">
-              <column justify-content="space-between" class="h-100">
-                <card class="pa-1 ma-1 el-0">
-                  <h2>{{ p.title }}</h2>
+              class="ma-2 hoverable"
+              :bg-image="p.image">
+              <column justify-content="end" class="h-100">
+                <card class="pa-2 el-0 bt bw-2 fw-medium" style="text-transform: uppercase;">
+                  <div class="mt-1 of-visible">{{ p.title }}</div>
                 </card>
-                <card v-if="p.subtitle" class="pa-1 ma-1 el-0">
+                <!--card v-if="p.subtitle" class="pa-1 ma-1 el-0">
                   <div>{{ p.subtitle }}</div>
-                </card>
+                </card-->
               </column>
-              <template #background>
-                <nuxt-img class="w-100" :src="p.image"></nuxt-img>
-              </template>
             </card>
           </nuxt-link>
         </div>

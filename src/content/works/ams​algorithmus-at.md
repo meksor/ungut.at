@@ -7,7 +7,7 @@ image: /img/works/amsalgorithmus.at/main.jpg
 headerImage: /img/works/amsalgorithmus.at/header.jpg
 
 links: 
-  - title: Website Link
+  - title: Website
     icon: mdiOpenInNew
     url: https://amsalgorithmus.at/
   - title: amsalgorithmus.at on Github

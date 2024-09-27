@@ -7,7 +7,7 @@ image: /img/works/iksw.at/main.png
 headerImage: /img/works/iksw.at/header.png
 
 links: 
-  - title: Website Link
+  - title: Website
     icon: mdiOpenInNew
     url: https://istkicklschonweg.at
   - title: iksw.at on Github
