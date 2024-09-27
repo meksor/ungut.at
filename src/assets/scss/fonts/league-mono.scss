@@ -39,7 +39,7 @@ $variations : (
   @font-face {
     font-family: 'League Mono';
     font-display: swap;
-    src: url("/fonts/League/LeagueMono-Narrow#{$var}.woff2") format('woff2');
+    src: url("/fonts/LeagueMono/LeagueMono-Narrow#{$var}.woff2") format('woff2');
     @each $name, $val in $attrs {
         #{$name}: #{$val};
     }

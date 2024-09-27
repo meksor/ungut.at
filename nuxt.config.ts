@@ -49,6 +49,9 @@ export default defineNuxtConfig({
       routes: ['/', '/works/']
     }
   },
+  build: {
+    analyze: {},
+  },
   vite: {
     build: {
     },
