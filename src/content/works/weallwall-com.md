@@ -1,6 +1,6 @@
 ---
 date: 2020-09-01
-title: weallwall.com
+title: weall​wall.com
 subtitle: Event Networking for Artists
 
 image: /img/works/weallwall.com/main.png

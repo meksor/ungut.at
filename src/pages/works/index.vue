@@ -14,7 +14,7 @@
             <card
               :key="p._path + '/'" 
               aspect-ratio="1 / 1"
-              class="ma-2 hoverable"
+              class="ma-2 hoverable of-hidden"
               :bg-image="p.image">
               <column justify-content="end" class="h-100">
                 <card class="pa-2 el-0 bt bw-2 fw-medium" style="text-transform: uppercase;">
