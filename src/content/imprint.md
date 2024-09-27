@@ -1,4 +1,4 @@
-**Max Wolsch.**  
+**Max Wolschlager**  
 Programmer, Artist
 ::br
 ::
