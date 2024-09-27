@@ -20,6 +20,7 @@
                 <card class="pa-2 el-0 bt bw-2 fw-medium" style="text-transform: uppercase;">
                   <div class="mt-1 of-visible">{{ p.title }}</div>
                 </card>
+                
                 <!--card v-if="p.subtitle" class="pa-1 ma-1 el-0">
                   <div>{{ p.subtitle }}</div>
                 </card-->
