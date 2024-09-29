@@ -4,13 +4,13 @@
     "build": "nuxt build",
     "dev": "nuxt dev --host 0.0.0.0",
     "generate": "nuxt generate",
-    "preview": "nuxt preview",
     "preview": "npx nuxi ananlyze"
   },
   "devDependencies": {
     "@nuxt/content": "^2.13.2",
     "@nuxt/image": "^1.8.0",
     "@nuxthq/studio": "^2.0.3",
+    "@nuxtjs/seo": "^2.0.0-rc.23",
     "@types/node": "^18.19.44",
     "nuxt": "^3.12.4",
     "nuxt-mdi": "^2.1.1",

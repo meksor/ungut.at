@@ -8,7 +8,17 @@ export default defineNuxtConfig({
     },
     layoutTransition: { name: 'layout', mode: 'in-out' }
   },
-  modules: ['@nuxt/content', "@nuxt/image", '@nuxthq/studio', 'nuxt-mdi'],
+  site: {
+    url: 'https://ungut.at',
+    name: 'Max Wolschlager - ungut.at'
+  },
+  modules: [
+    '@nuxt/content',
+    "@nuxt/image",
+    '@nuxthq/studio',
+    'nuxt-mdi',
+    '@nuxtjs/seo'
+  ],
   srcDir: 'src/',
   ssr: true,
   routeRules: {
