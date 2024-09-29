@@ -30,7 +30,18 @@
 
 
 <script setup lang="ts">
+const img = useImage()
+definePageMeta({
+    title: 'Max Wolschlager',
 
+})
+useSeoMeta({
+    title: 'Max Wolschlager',
+    description: 'Programmer, Artist',
+    ogDescription: 'Programmer, Artist',
+    ogImage: img("/img/fallback.png"),
+    twitterCard: 'summary_large_image',
+})
 </script>
 
 <style lang="scss">

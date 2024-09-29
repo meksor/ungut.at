@@ -70,7 +70,9 @@ The fourth IFD is the one we want to decode, it holds the raw and losslessly com
 
 ::
 
-## Debayering
+Keep in mind that a camera does not actually capture all three colors per pixel. Instead, the sensor is covered with a pattern of colored and translucent material called a "[Bayer Filter](https://en.wikipedia.org/wiki/Bayer_filter)".
 
-I stopped at this point because I got distracted by something else. 
+## De-bayering
+
+I stopped at this point because I got distracted by something else and had implemented de-bayering previously in another project.
 Thankfully there is projects like [libcraw2](https://github.com/lclevy/libcraw2) you can use instead.

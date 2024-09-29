@@ -19,6 +19,10 @@
 
           </ContentRenderer>
         </card-text>
+        <divider />
+        <card-text >
+          <doc-signature :date="doc.date"></doc-signature>
+        </card-text>
       </card>
     </article>
   </div>  
@@ -26,15 +30,23 @@
 
 
 <script setup lang="ts">
+const img = useImage();
 const route = useRoute();
 const router = useRouter();
 const backPath = computed(() => router.options.history.state.back as string ?? "/works");
-const { data: doc } = await useAsyncData(`content:${route.path}`, () => queryContent(route.path).findOne())
+const { data: doc } : any = await useAsyncData(`content:${route.path}`, () => queryContent(route.path).findOne())
 
 definePageMeta({ 
   layout: 'works',
 }) 
 
+useSeoMeta({
+    title: doc?.title,
+    description: doc?.subtitle,
+    ogDescription: doc?.subtitle,
+    ogImage: img(doc?.image),
+    twitterCard: 'summary_large_image',
+})
 </script>
 
 <style lang="scss">

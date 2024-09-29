@@ -26,6 +26,7 @@ body {
   font-size: 1.25rem;
 
   p {
+    overflow: visible;
     line-height: 120%;
     a {
       text-decoration: underline;
@@ -38,6 +39,7 @@ body {
     font-size: 1rem;
     overflow: scroll;
     code {
+
       overflow: scroll;
     }
   }
@@ -77,6 +79,8 @@ pre {
 }
 code {
   border-radius: .125rem;
+  font-size: 1rem;
+  padding: .125rem;
 }
 
 .dark {

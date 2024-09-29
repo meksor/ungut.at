@@ -22,5 +22,8 @@ categories:
 ## Huh?
 
 A small social network to help artists and hackers network at events. Conceived by Jakob Barth and Christian Schratt for the work-in-progress festival "Schmiede". Coded by Thomas Kolar and me. It was built in a month, go easy on us!
+
 ![Feed](/img/works/weallwall.com/feed.png)
+
+
 ![Participants](/img/works/weallwall.com/participants.png)

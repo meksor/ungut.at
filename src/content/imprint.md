@@ -1,3 +1,7 @@
+---
+title: Max Wolschlager
+---
+
 **Max Wolschlager**  
 Programmer, Artist
 ::br
