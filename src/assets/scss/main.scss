@@ -22,6 +22,10 @@ ol {
 }
 
 body {
+  * {
+    overflow: unset;
+
+  }
   font-family: "League Spartan";
   font-size: 1.25rem;
 
@@ -34,6 +38,7 @@ body {
   }
 
   pre {
+    overflow: scroll;
     padding: 1rem;
     font-family: "League Mono";
     font-size: 1rem;
