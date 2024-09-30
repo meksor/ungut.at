@@ -30,7 +30,7 @@ I knew I had to make it more affordable, so I consulted with a few of my electro
 It was like Christmas!
 
 ::row{justify-content=center}
-![Goodies](/img/works/annoying-assholes/goodies.jpg){width=750px}
+![Goodies](/img/works/annoying-assholes/goodies.jpg)
 ::
 
 The first PCB was designed by [Amir](https://github.com/kallaballa) in a CAD program and home-made at our local hackerspace [Metalab](http://metalab.at/).

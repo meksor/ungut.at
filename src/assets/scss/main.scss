@@ -22,12 +22,12 @@ ol {
 }
 
 body {
-  * {
-    overflow: unset;
-
-  }
   font-family: "League Spartan";
   font-size: 1.25rem;
+
+  * {
+    overflow: unset;
+  }
 
   p {
     overflow: visible;
@@ -56,6 +56,9 @@ body {
 
   a:hover {
     text-decoration: underline;
+  }
+  .youtube-video, img {
+    margin-bottom: 1.5rem;
   }
 }
 

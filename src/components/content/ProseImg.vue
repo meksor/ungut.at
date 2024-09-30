@@ -11,6 +11,8 @@ interface Props {
   height?: string | number
 }
 
-const props = withDefaults(defineProps<Props>(), {})
+const props = withDefaults(defineProps<Props>(), {
+  width: '700px'
+})
 
 </script>

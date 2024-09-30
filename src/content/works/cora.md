@@ -66,7 +66,7 @@ The fourth IFD is the one we want to decode, it holds the raw and losslessly com
 
 ::row{justify-content=center}
 
-![Decoded File](/img/works/cora/raw.jpg){width=750px}
+![Decoded File](/img/works/cora/raw.jpg)
 
 ::
 

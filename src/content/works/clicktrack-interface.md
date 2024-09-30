@@ -18,6 +18,6 @@ Technically, you could play this thing like a mini-rythm controlling keyboard by
 
 ::row{justify-content=center}
 
-![Connected to a Pocket Operator](/img/works/clicktrack-interface/pocket_op.jpg){width=500px}
+![Connected to a Pocket Operator](/img/works/clicktrack-interface/pocket_op.jpg)
 
 ::

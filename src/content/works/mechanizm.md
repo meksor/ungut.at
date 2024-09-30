@@ -37,7 +37,7 @@ Afterwards the split tracks can be converted to midi by filtering for relevant f
 [Reaper](https://www.reaper.fm/) offers a wide range of control for doing this. Other digital audio workstations are available.
 
 ::row{justify-content=center}
-![Reaper MIDI Trigger](/img/works/mechanizm/reaper_midi_trigger.png){width=600px}
+![Reaper MIDI Trigger](/img/works/mechanizm/reaper_midi_trigger.png)
 ::
 
 ### Mechanizm
@@ -45,7 +45,7 @@ Afterwards the split tracks can be converted to midi by filtering for relevant f
 Next the source videos are imported into mechanizm and rythmic points can be defined.
 
 ::row{justify-content=center}
-![Mechanizm Clips Window](/img/works/mechanizm/clips.png){width=600px}
+![Mechanizm Clips Window](/img/works/mechanizm/clips.png)
 ::
 
 These "clips" can then be mapped to the MIDI files from above. Here I mapped the kick to increase the position to the next key frame and the snare to do the opposite: 
