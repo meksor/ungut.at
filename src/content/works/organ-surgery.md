@@ -22,13 +22,13 @@ It is now able to control external MIDI devices and also usable as a soundsystem
 It made it's first public appearance at Schmiede 2020 where Julian Kenji and I performed on it together. It was very loud.
 
 ::row{justify-content=center}
-![Cube and Nico](/img/works/organ-surgery/cbe_nio.JPG)
+![Cube and Nico](/img/works/organ-surgery/cbe_nio.jpg)
 ::
 
 ::row{justify-content=center}
-![Front](/img/works/organ-surgery/front.JPG)
+![Front](/img/works/organ-surgery/front.jpg)
 ::
 
 ::row{justify-content=center}
-![Back](/img/works/organ-surgery/back.JPG)
+![Back](/img/works/organ-surgery/back.jpg)
 ::
