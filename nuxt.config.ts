@@ -10,7 +10,8 @@ export default defineNuxtConfig({
   },
   site: {
     url: 'https://ungut.at',
-    name: 'Max Wolschlager - ungut.at'
+    name: 'Max Wolschlager - ungut.at',
+    trailingSlash: true,
   },
   modules: [
     '@nuxt/content',
