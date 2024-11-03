@@ -25,5 +25,22 @@ This was my first software service with all the bells and whistles. It brought m
 
 omare.net featured a crawler framework, a natural-language analysis pipeline, complicated ontology, full-text search optimizations and a comprhensive UI to look at it all.
 
-![Entities View](/img/works/omare.net/entities_view.png)
+::row{justify-content=center}
+![Overview](/img/works/omare.net/omare.net_overview.png)
+::
+::row{justify-content=center}
+![Entities View](/img/works/omare.net/omare.net_entity.png)
+::
+::row{justify-content=center}
+![Crawler Metrics](/img/works/omare.net/omare.net_Screenshot_consumption_sites.png)
+::
+::row{justify-content=center}
+![Full Text Search](/img/works/omare.net/omare.net_Screenshot_search.png)
+::
+::row{justify-content=center}
+![Admin View](/img/works/omare.net/omare.net_Screenshot_storage.png)
+::
+::row{justify-content=center}
+![Style Playground](/img/works/omare.net/omare.net_Screenshot_style.png)
+::
 
