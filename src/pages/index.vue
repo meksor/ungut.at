@@ -1,4 +1,5 @@
 <template>
+  <div>
   <column style="height: 100dvh; position: relative;" class="container" justify-content="space-between">
     <column justify-content="end" class="mt-3 mx-2">
       <row class="mt-2" justify-content="end">
@@ -26,6 +27,15 @@
       </btn>
     </row>
   </column>
+  <row class="my-4 container" justify-content="middle">
+    <card>
+      <card-text>
+        <ContentDoc class="ta-end of-visible" path="/legal" />
+      </card-text>
+    </card>
+</row>
+
+</div>
 </template>
 
 
