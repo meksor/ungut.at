@@ -5,7 +5,10 @@
       <row class="mt-2" justify-content="end">
         <card>
           <card-text>
-            <ContentDoc class="ta-end of-visible" path="/imprint" />
+
+            <ContentQuery path="/imprint"  find="one" v-slot="{ data }">
+              <ContentRenderer class="ta-end of-visible" :value="data" />
+            </ContentQuery>
           </card-text>
         </card>
       </row>
@@ -30,7 +33,9 @@
   <row class="my-4 container" justify-content="middle">
     <card>
       <card-text>
-        <ContentDoc class="ta-end of-visible" path="/legal" />
+        <ContentQuery path="/legal" find="one" v-slot="{ data }">
+          <ContentRenderer class="ta-end of-visible" :value="data" />
+        </ContentQuery>
       </card-text>
     </card>
 </row>
