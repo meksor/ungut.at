@@ -43,7 +43,7 @@ const fetchFragmentShaderSource = async () => {
   console.log(props.path)
   console.log(import.meta.url)
 
-  const shaderUrl = new URL(`/_nuxt/${props.path}`, new URL(import.meta.url).origin).href
+  const shaderUrl = new URL(props.path, new URL(import.meta.url).origin + '/_nuxt/public/').href
   console.info(`Fetching fragment shader source from '${shaderUrl}'`)
 
   const res : string | Blob = await $fetch(shaderUrl)
