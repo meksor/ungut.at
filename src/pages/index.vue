@@ -6,8 +6,8 @@
         <card>
           <card-text>
 
-            <ContentQuery path="/imprint"  find="one" v-slot="{ data }">
-              <ContentRenderer class="ta-end of-visible" :value="data" />
+            <ContentQuery path="/imprint"  find="one" v-slot="{ data: iData }">
+              <ContentRenderer class="ta-end of-visible" :value="iData" />
             </ContentQuery>
           </card-text>
         </card>
@@ -33,8 +33,8 @@
   <row class="my-4 container" justify-content="middle">
     <card>
       <card-text>
-        <ContentQuery path="/legal" find="one" v-slot="{ data }">
-          <ContentRenderer class="ta-end of-visible" :value="data" />
+        <ContentQuery path="/legal" find="one" v-slot="{ data: lData }">
+          <ContentRenderer class="ta-end of-visible" :value="lData" />
         </ContentQuery>
       </card-text>
     </card>
