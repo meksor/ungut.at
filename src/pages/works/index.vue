@@ -10,9 +10,9 @@
     <row class="my-4">
       <ContentQuery path="/works/" :sort="sortBy" v-slot="{data: works}">
         <div v-for="p in works" class="w-100 w-half-sm-up w-third-md-up w-fifth-lg-up">
-          <nuxt-link :to="p._path + '/'">
+          <nuxt-link :to="p._path">
             <card
-              :key="p._path + '/'" 
+              :key="p._path" 
               aspect-ratio="1 / 1"
               class="ma-2 hoverable of-hidden"
               :bg-image="p.image">
