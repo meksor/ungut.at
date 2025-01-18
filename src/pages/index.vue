@@ -5,10 +5,13 @@
       <row class="mt-2" justify-content="end">
         <card>
           <card-text>
-
-            <ContentQuery path="/imprint"  find="one" v-slot="{ data: iData }">
-              <ContentRenderer class="ta-end of-visible" :value="iData" />
-            </ContentQuery>
+            <ContentQuery path="/imprint"  find="one">
+              <template #default="{ data: iData }">
+                <ContentRenderer class="ta-end of-visible" :value="iData" />
+              </template>
+              <template #empty></template>
+              <template #not-found></template>
+            </ContentQuery>            
           </card-text>
         </card>
       </row>
@@ -33,8 +36,12 @@
   <row class="my-4 container" justify-content="middle">
     <card>
       <card-text>
-        <ContentQuery path="/legal" find="one" v-slot="{ data: lData }">
-          <ContentRenderer class="ta-end of-visible" :value="lData" />
+        <ContentQuery path="/legal" find="one">
+          <template #default="{ data: lData }">
+            <ContentRenderer class="ta-end of-visible" :value="lData" />
+          </template>
+          <template #empty></template>
+          <template #not-found></template>
         </ContentQuery>
       </card-text>
     </card>
