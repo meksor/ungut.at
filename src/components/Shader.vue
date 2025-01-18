@@ -4,6 +4,7 @@
 
 <script setup lang="ts">
 import * as twgl from 'twgl.js'
+
 interface Texture {
   name: string
   path: string
@@ -39,7 +40,10 @@ void main() {
 }
 `
 const fetchFragmentShaderSource = async () => {
-  const shaderUrl = new URL(`/${props.path}`, import.meta.url).href
+  console.log(props.path)
+  console.log(import.meta.url)
+
+  const shaderUrl = new URL(`/_nuxt/${props.path}`, new URL(import.meta.url).origin).href
   console.info(`Fetching fragment shader source from '${shaderUrl}'`)
 
   const res : string | Blob = await $fetch(shaderUrl)

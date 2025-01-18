@@ -4,14 +4,19 @@
     <column justify-content="end" class="mt-3 mx-2">
       <row class="mt-2" justify-content="end">
         <card>
-          <card-text>
-            <ContentQuery path="/imprint"  find="one">
-              <template #default="{ data: iData }">
-                <ContentRenderer class="ta-end of-visible" :value="iData" />
-              </template>
-              <template #empty></template>
-              <template #not-found></template>
-            </ContentQuery>            
+          <card-text class="ta-end of-visible" >
+            <p>
+            <b>Max Wolschlager</b>
+            </p>
+            <p>
+            Programmer, Artist
+            </p>
+            <p>
+            public@ungut.at  
+            </p>
+            <p>
+            Vienna, Austria  
+            </p>
           </card-text>
         </card>
       </row>
