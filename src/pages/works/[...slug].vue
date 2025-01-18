@@ -33,7 +33,7 @@
 const img = useImage();
 const route = useRoute();
 const router = useRouter();
-const backPath = computed(() => router.options.history.state.back as string ?? "/works");
+const backPath = computed(() => router.options.history.state.back as string ?? "/works/");
 const { data: doc } : any = await useAsyncData(`content:${route.path}`, () => queryContent(route.path).findOne())
 
 definePageMeta({ 
