@@ -25,7 +25,7 @@ What once was a broken kid's piano now is a horrifying instrument which synthesi
 - not being able to sleep because you ate too much
 - a distupgrade breaking your system
 
-It's use as a musical instrument requires alot of experience and skill.
+Its use as a musical instrument requires alot of experience and skill.
 
 ::row{justify-content=center}
 ![Fan and Sensor](/img/works/aharmonicum/fan_sensor.jpg)

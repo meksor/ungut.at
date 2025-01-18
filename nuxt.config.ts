@@ -27,34 +27,6 @@ export default defineNuxtConfig({
     // "/api/**": { isr: false },
   },
   css: ["@/assets/scss/main.scss", "@/assets/scss/utils.scss"],
-  content: {
-    documentDriven: true,
-    sources: {
-      global: {
-        driver: 'fs',
-        prefix: '',
-        base: resolve(__dirname, 'content')
-      },
-    },
-    highlight: {
-      theme: 'houston',
-      langs: [
-        'json', 
-        'js', 
-        'ts', 
-        'html', 
-        'css', 
-        'vue', 
-        'shell', 
-        'mdc', 
-        'md', 
-        'yaml',
-        'c',
-        'cpp',
-        'java'
-      ]
-    }
-  },
   nitro: {
     prerender: {
       routes: ['/', '/works/']

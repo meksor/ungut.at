@@ -5,7 +5,9 @@
       <row class="mt-2" justify-content="end">
         <card>
           <card-text>
-            <ContentDoc class="ta-end of-visible" path="/imprint" />
+            <ContentRenderer class="ta-end of-visible"  :value="imprint">
+            </ContentRenderer>
+
           </card-text>
         </card>
       </row>
@@ -30,7 +32,10 @@
   <row class="my-4 container" justify-content="middle">
     <card>
       <card-text>
-        <ContentDoc class="ta-end of-visible" path="/legal" />
+        <ContentRenderer class="ta-end of-visible" :value="legal">
+        </ContentRenderer>
+
+
       </card-text>
     </card>
 </row>
@@ -51,6 +56,12 @@ useSeoMeta({
     ogDescription: 'Programmer, Artist',
     ogImage: img("/img/fallback.png"),
     twitterCard: 'summary_large_image',
+})
+const { data: imprint } = await useAsyncData('imprint', () => {
+  return queryCollection('content').path('imprint').first()
+})
+const { data: legal } = await useAsyncData('legal', () => {
+  return queryCollection('content').path('legal').first()
 })
 </script>
 

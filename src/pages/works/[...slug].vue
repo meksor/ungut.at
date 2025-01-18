@@ -6,13 +6,13 @@
       </btn>
     </div>
     <article class="container">
-      <card v-if="doc" class="ma-2 el-2">
+      <card v-if="page" class="ma-2 el-2">
         <card-text >
-          <doc-header :doc="doc"></doc-header>
+          <doc-header :doc="page"></doc-header>
         </card-text>
-        <nuxt-img class="header__image" fit="cover" :src="doc.headerImage" width="100%"></nuxt-img>
+        <nuxt-img class="header__image" fit="cover" :src="page.headerImage" width="100%"></nuxt-img>
         <card-text>
-          <ContentRenderer class="body-text" :value="doc">
+          <ContentRenderer class="body-text" :value="page">
             <template #empty>
               Nothing here...
             </template>
@@ -21,30 +21,31 @@
         </card-text>
         <divider />
         <card-text >
-          <doc-signature :date="doc.date"></doc-signature>
+          <doc-signature :date="page.date"></doc-signature>
         </card-text>
       </card>
     </article>
   </div>  
 </template>
 
-
 <script setup lang="ts">
 const img = useImage();
 const route = useRoute();
 const router = useRouter();
 const backPath = computed(() => router.options.history.state.back as string ?? "/works/");
-const { data: doc } : any = await useAsyncData(`content:${route.path}`, () => queryContent(route.path).findOne())
+const { data: page } = await useAsyncData(route.path, () => {
+  return queryCollection('content').path(route.path).first()
+})
 
 definePageMeta({ 
   layout: 'works',
 }) 
 
 useSeoMeta({
-    title: doc?.title,
-    description: doc?.subtitle,
-    ogDescription: doc?.subtitle,
-    ogImage: img(doc?.image),
+    title: page.value?.title,
+    description: page.value?.subtitle,
+    ogDescription: page.value?.subtitle,
+    ogImage: img(page.value?.image),
     twitterCard: 'summary_large_image',
 })
 </script>

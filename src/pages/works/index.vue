@@ -2,10 +2,10 @@
   <div class="container">
     <row class="mt-4" justify-content="center">
       <h1 class="fs-7 fs-sm-up-9 fs-md-up-10">WORKS</h1>
-      <ContentDoc>
+      <ContentRenderer :value="page">
         <template #empty>
         </template>
-      </ContentDoc>
+      </ContentRenderer>
     </row>
     <row class="my-4">
       <ContentQuery path="/works/" :sort="sortBy" v-slot="{data: works}">
@@ -34,7 +34,13 @@
 </template>
 
 <script setup lang="ts">
+import { validateHeaderName } from 'http';
+
 const sortBy = ref({ date: -1 })
+const route = useRoute()
+const { data: page } = await useAsyncData(route.path, () => {
+  return queryCollection('content').path(route.path).first()
+})
 
 definePageMeta({ 
   layout: 'works',
