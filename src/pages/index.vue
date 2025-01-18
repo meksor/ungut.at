@@ -33,7 +33,7 @@
       <!--btn to="/gallery/" icon="mdiArtboard" class="mr-2">
         GALLERY
       </btn-->
-      <btn to="/works" icon="mdiGrid" class="fs-5 bw-4">
+      <btn to="/works/" icon="mdiGrid" class="fs-5 bw-4">
         WORKS
       </btn>
     </row>
