@@ -9,9 +9,6 @@
             <b>Max Wolschlager</b>
             </p>
             <p>
-            Programmer, Artist
-            </p>
-            <p>
             public@ungut.at  
             </p>
             <p>
